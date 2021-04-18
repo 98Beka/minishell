@@ -3,80 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   shell_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/17 10:34:47 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/18 05:59:56 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	change_cmd_line(t_msh *msh)
+void up_down(t_msh *msh, char *bf, int *len, ssize_t *stp)
 {
-	(void)msh;
-	tputs(restore_cursor, 1, ft_putchar);
-	tputs(tgetstr("ed", 0), 1, ft_putchar);
+	char *tmp;
+	
+	clean_console(msh, len);
+		tputs(restore_cursor, 1, ft_putchar);
+	if (!ft_strncmp(bf, "\e[A", 3))
+	{
+		if (msh->h_index)
+			msh->h_index -=1;
+			tmp =  msh->history[msh->h_index];
+	}
+	if (!ft_strncmp(bf, "\e[B", 3))
+	{ 
+		if (msh->history[msh->h_index + 1])
+				msh->h_index +=1;
+			tmp = msh->history[msh->h_index];
+	}
+	*stp = write(0, tmp, ft_strlen(tmp));
+	free(msh->line);
+	msh->line = ft_strdup(tmp);
+	*len = ft_strlen(tmp);
 }
 
-int	shell_prompt(t_msh *msh)
+void right_left_del(t_msh *msh, ssize_t *stp, int len, char *bf)
 {
-	int		l;
-	int		len;
-	ssize_t	step;
+	if (!ft_strncmp(bf, "\e[C", 3))
+	 	if (*stp < len)
+		{
+			(*stp)++;
+			tputs(cursor_right, 1, ft_putchar);
+		}
+	if (!ft_strncmp(bf, "\e[D", 3))
+		if (*stp > 0)
+		{
+			(*stp)--;
+			tputs(cursor_left, 1, ft_putchar);
+		}
+	if (!ft_strncmp(bf, "\177", 1))
+		if (*stp > 0)
+		{
+			(*stp)--;
+			del_cap(msh, len);
+		}
+}
 
-	step = 0;
-	len = 0;
+int	shell_prompt(t_msh *msh, char *bf, int len, int l, ssize_t stp)
+{
 	msh->line = NULL;
 	tputs(save_cursor, 1, ft_putchar);
-	while (!ft_strnstr(msh->buff, "\n", BUFF_SIZE)
-		&& !ft_strnstr(msh->buff, "\4", BUFF_SIZE))
+	msh->h_index = dbl_len(msh->history) - 1;
+	while (!ft_strnstr(bf, "\n", 1))
 	{
 		l = read(0, msh->buff, BUFF_SIZE);
-		if (!ft_strncmp(msh->buff, "\e[A", ft_strlen("\e[A")))
-		{
-			change_cmd_line(msh);
-			write(0, "previous in history", 20);
-		}
-		else if (!ft_strncmp(msh->buff, "\e[B", ft_strlen("\e[B")))
-		{
-			change_cmd_line(msh);
-			write(0, "next in history", 16);
-		}
-		else if (!ft_strncmp(msh->buff, "\e[C", ft_strlen("\e[C")))
-		{
-			if (step < len)
-			{
-				step++;
-				tputs(cursor_right, 1, ft_putchar);
-			}
-		}
-		else if (!ft_strncmp(msh->buff, "\e[D", ft_strlen("\e[D")))
-		{
-			if (step > 0)
-			{
-				step--;
-				tputs(cursor_left, 1, ft_putchar);
-			}
-		}
-		else if (!ft_strncmp(msh->buff, "\177", ft_strlen("\177")))
-		{
-			if (step > 0)
-			{
-				step--;
-				tputs(cursor_left, 1, ft_putchar);
-				del_at_index(&msh->line, len - 1);
-				tputs(tgetstr("dc", 0), 1, ft_putchar);
-			}
-		}
-		else if (!ft_strncmp(msh->buff, "\4", ft_strlen("\4")))
+		if (!ft_strncmp(bf, "\e[A", 3) || !ft_strncmp(bf, "\e[B", 3))
+			up_down(msh, bf, &len, &stp);
+		else if (!ft_strncmp(bf, "\e[C", 3) ||\
+		 !ft_strncmp(bf, "\e[D", 3) || !ft_strncmp(bf, "\177", 1))
+			right_left_del(msh, &stp, len, bf);
+		else if (!ft_strncmp(bf, "\4", 1))
 			return (0);
 		else
-			step += write(1, msh->buff, l);
-		if (ft_isprint(*msh->buff))
-			make_line(&msh->line, *msh->buff);
+			stp += write(1, bf, l);
+		if (ft_isprint(*bf))
+			make_line(&msh->line, *bf);
 		len = ft_strlen(msh->line);
 	}
-	*msh->buff = 0;
+	*bf = 0;
 	return (1);
 }

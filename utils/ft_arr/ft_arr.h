@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arr.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 12:50:22 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/17 13:06:52 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/18 04:30:55 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ int     add_f_char(char **line, char ch);
 int     make_line(char **line, char ch);
 int     add_char_index(char **line, char ch, int index);
 int		del_in_index(char **line, int index);
+int     dbl_len(char **input);
 #endif

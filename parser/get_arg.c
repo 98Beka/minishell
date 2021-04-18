@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/17 15:13:24 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/17 16:07:48 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char            *get_arg(t_msh *msh, char **line)
                 mkline_dlch(&out, line);
         if (**line == '$')
             dollar(msh, line);
-        if (**line && !(msh->pf & SNGL))
+        if (**line && !(msh->pf & SNGL) && **line != '\"')
             mkline_dlch(&out, line);
 	}
 	return (out);

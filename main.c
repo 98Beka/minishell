@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/17 15:11:56 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/18 04:06:24 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ int		loop(t_msh *msh)
 	msh->fd = 0;
 	msh->line = NULL;
 	ft_putstr_fd("minishell > ", 1);
-	if (!shell_prompt(msh))
+	if (!shell_prompt(msh, msh->buff, 0, 0, 0))
 		exec_exit(msh);
 	if (!msh->line)
 		msh->line = ft_strdup("");
+	else
+		set_history(msh);
 	pars_line(msh, &msh->line);
 	while(*msh->cmd->arg)
 	{
@@ -61,17 +63,15 @@ int		main(int ac, char **av, char **envp)
 	(void)ac;
 	t_msh	msh;
 	msh.env = NULL;
+	init_history(&msh);
 	get_envp(envp, &msh);
 	set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
 	msh.shell_name = ft_strdup(av[0] + 2);	
 	set_termcap(&msh);
 	
-	// msh.line = ft_strdup("ls -la");
-	// msh.cmd->arg = pars_line(&msh.line);
+	// msh.line = ft_strdup("ech\"\"o");
+	// pars_line(&msh, &msh.line);
 	// execute(&msh);
-	
-	
-	//msh->fd = open("debug", O_RDONLY);
 	
 	while (loop(&msh))
 		NULL;

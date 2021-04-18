@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/17 13:35:12 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/18 04:23:56 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_msh
 	char			*shell_name;
 	char			*term_name;
 	char			**env;
+	char			**history;
+	int				h_index;
 	t_cmd			*cmd;
 	char			pf;
 	char			cmd_flag;
@@ -77,7 +79,7 @@ int		exec_echo(t_msh *msh);
 
 int		ft_error(t_msh *msh, char *msg);
 int		set_termcap(t_msh *msh);
-int		shell_prompt(t_msh *msh);
+int		shell_prompt(t_msh *msh, char *bf, int len, int l, ssize_t stp);
 int		exec_bin(t_msh *msh);
 char	*get_binary(t_msh *msh);
 int		exec_pipe(t_msh *msh);
@@ -89,5 +91,10 @@ void	new_cmd(t_msh *msh, t_cmd **cmd, char **line);
 t_cmd	*last_cmd(t_cmd *cmd);
 char	*get_arg(t_msh *msh, char **line);
 void    mkline_dlch(char **out, char **line);
+void	change_cmd_line(t_msh *msh);
+void 	del_cap(t_msh *msh, int len);
+void 	clean_console(t_msh *msh, int *len);
+void	set_history(t_msh *msh);
+void	init_history(t_msh *msh);
 
 #endif // !MINISHELL_H

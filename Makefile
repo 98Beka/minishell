@@ -6,13 +6,11 @@
 #    By: ehande <ehande@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/04/17 14:57:23 by ehande           ###   ########.fr        #
+#    Updated: 2021/04/18 04:31:22 by ehande           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= minishell
-
-NAME_DBG	= a.out
 
 LIBFT		= ./utils/libft/libft.a
 
@@ -27,9 +25,11 @@ SRCS = \
 		utils/del_env_val.c \
 		utils/set_termcap.c \
 		utils/shell_prompt.c \
+                utils/shell_prompt_utils.c \
 		utils/gnl/get_next_line_utils.c \
 		utils/gnl/get_next_line.c \
 		utils/clear.c \
+                utils/history.c\
 		utils/get_binary.c \
 		parser/pars_line.c \
                 parser/get_arg.c \
@@ -51,7 +51,7 @@ LIB_ARR = \
         utils/ft_arr/free_2d.c utils/ft_arr/new_2d.c \
         utils/ft_arr/add_line.c utils/ft_arr/dl_line.c \
         utils/ft_arr/add_char.c utils/ft_arr/dl_char.c \
-        utils/ft_arr/make_line.c
+        utils/ft_arr/make_line.c utils/ft_arr/2d_len.c
 
 LIB_SRCS = \
         utils/libft/ft_atoi.c \
@@ -107,16 +107,16 @@ TERM		= -ltermcap
 # 			$(MAKE) -C utils/ft_arr/
 # 			$(CC) $(CFLAGS) -o $(NAME) $(LIBFT) $(2DARR) $(OBJS) $(TERM)
 
-all:		        $(NAME_DBG) clean
+all:		        $(NAME) clean
 
 
-$(NAME_DBG):	        $(OBJS)
-			$(CC) $(CFLAGS) -g -o $(NAME_DBG) $(SRCS) $(LIB_SRCS) $(LIB_ARR) $(TERM)
+$(NAME):	        $(OBJS)
+			@$(CC) -g $(SRCS) $(LIB_SRCS) $(LIB_ARR) $(TERM)
 
 clean:
-			$(MAKE) clean -C utils/libft/
-			$(MAKE) clean -C utils/ft_arr/
-			$(RM) $(OBJS) $(BONUS_OBJS)
+			@$(MAKE) clean -C utils/libft/
+			@$(MAKE) clean -C utils/ft_arr/
+			@$(RM) $(OBJS) $(BONUS_OBJS)
 
 fclean:		clean
 			$(MAKE) fclean -C utils/libft/
