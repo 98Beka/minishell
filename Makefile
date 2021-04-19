@@ -6,7 +6,7 @@
 #    By: ehande <ehande@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/04/18 04:31:22 by ehande           ###   ########.fr        #
+#    Updated: 2021/04/18 21:02:55 by ehande           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ SRCS = \
                 utils/shell_prompt_utils.c \
 		utils/gnl/get_next_line_utils.c \
 		utils/gnl/get_next_line.c \
-		utils/clear.c \
                 utils/history.c\
 		utils/get_binary.c \
 		parser/pars_line.c \

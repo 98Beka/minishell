@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_binary.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:26:57 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/17 13:28:09 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/18 21:05:45 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*get_binary(t_msh *msh)
 		fd = open(bin, O_RDONLY);
 		if (fd >= 0)
 		{
-			clear(split);
+			free_2d(&split);
 			close(fd);
 			free(path);
 			return (ft_strdup(bin));
@@ -49,6 +49,6 @@ char	*get_binary(t_msh *msh)
 		free(bin);
 	}
 	free(path);
-	clear(split);
+	free_2d(&split);
 	return (NULL);
 }

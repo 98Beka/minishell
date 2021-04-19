@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 10:07:52 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/17 13:29:28 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/18 21:06:50 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	declare(char ***env)
 			printf("declare -x %s=\"%s\"\n", split[0], split[1]);
 		else
 			printf("declare -x %s\n", split[0]);
-		clear(split);
+		free_2d(&split);
 	}
-	clear(dup);
+	free_2d(&dup);
 	return (1);
 }
 

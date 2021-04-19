@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_val.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:23:47 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/09 15:24:03 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/18 21:04:00 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ char	*get_env_val(char *key, char **env)
 		{
 			free(key_in);
 			arg = ft_strdup(tmp[1]);
-			clear(tmp);
+			free_2d(&tmp);
 			return (arg);
 		}
 		free(key_in);
-		clear(tmp);
+		free_2d(&tmp);
 	}
 	return (NULL);
 }

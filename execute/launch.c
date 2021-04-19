@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/17 13:31:52 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/19 15:40:27 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	launch(t_msh *msh)
 		while (cmd)
 		{
 			pid = fork();
+			if (msh->cmd->pipe)
+				pipe(msh->pipefd);
 			if (pid == 0)
 				exec_child(msh, path);
 			else if (pid < 0)

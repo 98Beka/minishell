@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/18 04:23:56 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/18 21:03:19 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	sort_envp(char ***env);
 char	*get_env_val(char *key, char **env);
 int		set_env_val(char ***env, char *key, char *value);
 int		del_env_val(char ***env, char *key);
-void	clear(char **array);
 void	exec_env(char **env);
 int		exec_pwd(t_msh *msh);
 int		exec_exit(t_msh *msh);

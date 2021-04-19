@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:23:20 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/17 13:29:02 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/18 21:06:25 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		exec_cd_previous_dir(t_msh *msh)
 		set_env_val(&msh->env, ft_strdup("OLDPWD"), tmp);
 		ft_putendl_fd(value, 1);
 	}
-	clear(msh->cmd->arg);
+	free_2d(&(msh->cmd->arg));
 	free(value);
 	return (1);
 }
