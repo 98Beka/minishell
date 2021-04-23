@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/18 04:06:24 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/22 20:12:32 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		execute(t_msh *msh)
 	if (!msh->cmd->arg[0])
 		ft_putstr_fd("", 1);
 	else if (!ft_strcmp(msh->cmd->arg[0], "env"))
-		exec_env(msh->env);
+		exec_env(msh);
 	else if (!ft_strcmp(msh->cmd->arg[0], "pwd"))
 		return (exec_pwd(msh));
 	else if (!ft_strcmp(msh->cmd->arg[0], "exit"))
@@ -37,7 +37,6 @@ int		execute(t_msh *msh)
 
 int		loop(t_msh *msh)
 {
-	msh->fd = 0;
 	msh->line = NULL;
 	ft_putstr_fd("minishell > ", 1);
 	if (!shell_prompt(msh, msh->buff, 0, 0, 0))
@@ -47,6 +46,7 @@ int		loop(t_msh *msh)
 	else
 		set_history(msh);
 	pars_line(msh, &msh->line);
+	set_fd(msh);
 	while(*msh->cmd->arg)
 	{
 		if(!execute(msh))

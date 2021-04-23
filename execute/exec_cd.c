@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:23:20 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/17 13:29:02 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/19 17:55:15 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int		exec_cd_previous_dir(t_msh *msh)
 	if (!getcwd(tmp, BUFF_SIZE))
 		return (ft_error(msh, NULL));
 	value = get_env_val("OLDPWD", msh->env);
+	//printf("%s\n", value);
+	//printf("%s\n", msh->cmd->arg[0]);
+	//printf("%s\n", msh->cmd->arg[1]);
 	if (!ft_strcmp(msh->cmd->arg[1], "-"))
 	{
 		free(msh->cmd->arg[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/18 04:23:56 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/23 12:37:13 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_cmd
 typedef struct s_msh
 {
 	int				fd;
-	int				pipefd[2];
+	int				**pfd;
 	int				num_redir;
 	char			*line;
 	char			*shell_name;
@@ -59,6 +59,8 @@ typedef struct s_msh
 	char			pf;
 	char			cmd_flag;
 	char			buff[BUFF_SIZE];
+	int				cmd_count;
+	int				pipe_count;
 	struct termios	term;
 }t_msh;
 
@@ -69,22 +71,25 @@ char	*get_env_val(char *key, char **env);
 int		set_env_val(char ***env, char *key, char *value);
 int		del_env_val(char ***env, char *key);
 void	clear(char **array);
-void	exec_env(char **env);
+void	exec_env(t_msh *msh);
 int		exec_pwd(t_msh *msh);
 int		exec_exit(t_msh *msh);
 int		exec_cd(t_msh *msh);
 int		exec_export(t_msh *msh);
 int		exec_unset(t_msh *msh);
 int		exec_echo(t_msh *msh);
+void	set_fd(t_msh *msh);
 
 int		ft_error(t_msh *msh, char *msg);
 int		set_termcap(t_msh *msh);
 int		shell_prompt(t_msh *msh, char *bf, int len, int l, ssize_t stp);
-int		exec_bin(t_msh *msh);
-char	*get_binary(t_msh *msh);
-int		exec_pipe(t_msh *msh);
+//int		exec_bin(t_msh *msh);
+//char	*get_binary(t_msh *msh);
+char	*get_binary(t_msh *msh, t_cmd *cmd);
+//int		exec_pipe(t_msh *msh);
 int		launch(t_msh *msh);
-int		exec_child(t_msh *msh, char *path);
+int		exec_child(t_msh *msh, char *bin_path);
+int		exec_parent(t_msh *msh, char *bin_path);
 void	skip_sp(char **line);
 void	skip_sp_ch(char **line, char ch);
 void	new_cmd(t_msh *msh, t_cmd **cmd, char **line);

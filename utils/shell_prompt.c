@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/18 05:59:56 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/19 11:24:02 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ void right_left_del(t_msh *msh, ssize_t *stp, int len, char *bf)
 
 int	shell_prompt(t_msh *msh, char *bf, int len, int l, ssize_t stp)
 {
+	(void)l;
+	(void)stp;
+	(void)len;
 	msh->line = NULL;
 	tputs(save_cursor, 1, ft_putchar);
 	msh->h_index = dbl_len(msh->history) - 1;
@@ -79,6 +82,7 @@ int	shell_prompt(t_msh *msh, char *bf, int len, int l, ssize_t stp)
 			make_line(&msh->line, *bf);
 		len = ft_strlen(msh->line);
 	}
+	//msh->line = ft_strdup("ls | ls -la");
 	*bf = 0;
 	return (1);
 }

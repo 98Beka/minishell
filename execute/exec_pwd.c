@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:47:14 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/14 11:48:23 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/20 16:32:38 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ int	exec_pwd(t_msh *msh)
 	(void)msh;
 	if (!(getcwd(buff, BUFF_SIZE)))
 		ft_error(msh, NULL);
-	ft_putendl_fd(buff, 1);
+	ft_putendl_fd(buff, msh->fd);
 	return (1);
 }

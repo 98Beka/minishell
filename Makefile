@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ehande <ehande@student.42.fr>              +#+  +:+       +#+         #
+#    By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/04/18 04:31:22 by ehande           ###   ########.fr        #
+#    Updated: 2021/04/20 10:50:49 by hveiled          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,6 @@ SRCS = \
 		execute/exec_export.c \
 		execute/exec_unset.c \
 		execute/exec_echo.c \
-		execute/exec_bin.c \
-		execute/exec_pipe.c \
 		execute/exec_child.c \
 		execute/launch.c \
 		execute/ft_error.c

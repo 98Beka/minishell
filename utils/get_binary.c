@@ -6,11 +6,15 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:26:57 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/17 13:28:09 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/21 18:05:22 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include "libft/libft.h"
+#include <sys/_types/_sigaltstack.h>
+#include <sys/fcntl.h>
+#include <sys/stat.h>
 
 char	*get_full_path(char *path, char *cmd)
 {
@@ -23,7 +27,26 @@ char	*get_full_path(char *path, char *cmd)
 	return (bin_cmd);
 }
 
-char	*get_binary(t_msh *msh)
+int	check_cmd(t_msh *msh, char *cmd)
+{
+	struct stat *statbuf;
+	int	fd;
+
+	statbuf = NULL;
+	fd = open(cmd, O_RDONLY);
+	if (fd >= 0)
+	{
+		if (fstat(fd, statbuf) < 0)
+		{
+			ft_error(msh, NULL);
+			return (0);
+		}
+		close(fd);
+	}
+	return (1);
+}
+
+char	*get_binary(t_msh *msh, t_cmd *cmd)
 {
 	char	**split;
 	char	*bin;
@@ -33,10 +56,12 @@ char	*get_binary(t_msh *msh)
 	
 	i = -1;
 	path = get_env_val("PATH", &(*msh->env));
+	if (!check_cmd(msh, path))
+		return (NULL);
 	split = ft_split(path, ':');
 	while (split[++i])
 	{
-		bin = get_full_path(split[i], msh->cmd->arg[0]);
+		bin = get_full_path(split[i], cmd->arg[0]);
 		fd = open(bin, O_RDONLY);
 		if (fd >= 0)
 		{

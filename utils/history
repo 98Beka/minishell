@@ -1,0 +1,14 @@
+ls
+cd ..
+ls
+pwd
+cd .
+pwd
+cd .
+pwd
+cd ..
+cd -
+echo $PWD
+cd ..
+ls
+cd ..

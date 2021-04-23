@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:21:48 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/12 16:49:25 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/19 21:04:34 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,21 @@ char	*find_del_key(char ****env, int *s1, char **key)
 	char	**envp;
 	int		i;
 	int		del;
+	char	*found;
 
 	envp = **env;
+	found = NULL;
 	i = *s1;
 	while (envp[i])
 	{
 		del = ft_strlen(*key);
-		if ((ft_strnstr(envp[i], *key, del) && envp[i][del] == '=')
-			|| (ft_strnstr(envp[i], *key, del) && envp[i][del]) == '\0')
-			return (envp[i]);
+		if (((ft_strnstr(envp[i], *key, del)) && (envp[i][del] == '='))
+			|| ((ft_strnstr(envp[i], *key, del)) && (envp[i][del]) == '\0'))
+				found = envp[i];
 		i++;
 	}
 	*s1 = i;
-	return (NULL);
+	return (found);
 }
 
 int	del_env_val(char ***env, char *key)
@@ -41,16 +43,7 @@ int	del_env_val(char ***env, char *key)
 
 	s1 = 0;
 	new_env = NULL;
-	// to_del = find_del_key(&env, &s1, &key);
-	while ((*env)[s1])
-	{
-		if ((ft_strnstr((*env)[s1], key, ft_strlen(key))
-			&& (*env)[s1][ft_strlen(key)] == '=')
-			|| (ft_strnstr((*env)[s1], key, ft_strlen(key))
-			&& (*env)[s1][ft_strlen(key)] == '\0'))
-			to_del = (*env)[s1];
-		s1++;
-	}
+	to_del = find_del_key(&env, &s1, &key);
 	if (!to_del)
 		return (1);
 	else
@@ -62,9 +55,7 @@ int	del_env_val(char ***env, char *key)
 	s2 = s1 - 1;
 	while (--s1 >= 0)
 	{
-		if (!ft_strcmp((*env)[s1], to_del))
-			continue ;
-		else
+		if (ft_strcmp((*env)[s1], to_del))
 			new_env[--s2] = ft_strdup((*env)[s1]);
 	}
 	clear(*env);

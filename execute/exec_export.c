@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 10:07:52 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/17 13:29:28 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/21 11:08:35 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,28 @@ char	**ft_arrdup(char **env)
 	return (dup);
 }
 
-int	declare(char ***env)
+void	printf_fd(int fd, char *flag, char *split0, char *split1)
+{
+	if (flag)
+	{
+		ft_putstr_fd("declare -x ", fd);
+		ft_putstr_fd(split0, fd);
+		ft_putstr_fd("=", fd);
+		ft_putendl_fd(split1, fd);
+	}
+	else
+	{
+		ft_putstr_fd("declare -x ", fd);
+		ft_putendl_fd(split0, fd);
+	}
+}
+
+int	declare(t_msh *msh, char ***env)
 {
 	int		i;
 	char	**dup;
 	char	**split;
+	char	*flag;
 	
 	dup = ft_arrdup(*env);
 	i = -1;
@@ -41,10 +58,8 @@ int	declare(char ***env)
 	while (dup[++i])
 	{
 		split = ft_split(dup[i], '=');
-		if (ft_strchr(dup[i], '='))
-			printf("declare -x %s=\"%s\"\n", split[0], split[1]);
-		else
-			printf("declare -x %s\n", split[0]);
+		flag = ft_strchr(dup[i], '=');
+		printf_fd(msh->fd, flag, split[0], split[1]);
 		clear(split);
 	}
 	clear(dup);
@@ -57,7 +72,7 @@ int	exec_export(t_msh *msh)
 	
 	var = NULL;
 	if (msh->cmd->arg[1] == NULL)
-		return (declare(&msh->env));
+		return (declare(msh, &msh->env));
 	// else if (!check_key(msh->cmd->arg[1]))
 	// 	return (1);
 	else

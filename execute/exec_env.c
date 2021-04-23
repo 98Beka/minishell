@@ -6,21 +6,21 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:36:35 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/10 11:41:25 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/20 17:04:12 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	exec_env(char **env)
+void	exec_env(t_msh *msh)
 {
 	int		i;
 
 	i = 0;
-	while (env[i])
+	while (msh->env[i])
 	{
-		if (ft_strrchr(env[i], '='))
-			ft_putendl_fd(env[i], 1);
+		if (ft_strrchr(msh->env[i], '='))
+			ft_putendl_fd(msh->env[i], msh->fd);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/17 16:07:48 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/19 21:39:11 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void dollar(t_msh *msh, char **line)
 		mkline_dlch(&d, line);
 	tmp = get_env_val(d, msh->env);
 	i = -1;
+	if (!tmp)
+		return ;
 	while (tmp[++i])
 		add_char_index(line, tmp[i], i);
 	free(tmp);
