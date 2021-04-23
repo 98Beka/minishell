@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:26:57 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/21 18:05:22 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/23 16:12:49 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*get_binary(t_msh *msh, t_cmd *cmd)
 		fd = open(bin, O_RDONLY);
 		if (fd >= 0)
 		{
-			clear(split);
+			free_2d(&split);
 			close(fd);
 			free(path);
 			return (ft_strdup(bin));
@@ -74,6 +74,6 @@ char	*get_binary(t_msh *msh, t_cmd *cmd)
 		free(bin);
 	}
 	free(path);
-	clear(split);
+	free_2d(&split);
 	return (NULL);
 }

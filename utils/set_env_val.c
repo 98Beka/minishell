@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_val.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:20:44 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/11 12:42:48 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/18 21:04:45 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		set_env_val(char ***env, char *key, char *value)
 	free(tmp);
 	while (--i >= 0)
 		new_env[i] = ft_strdup((*env)[i]);
-	clear(*env);
+	free_2d(env);
 	*env = new_env;
 	return (1);
 }

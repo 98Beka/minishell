@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:23:47 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/19 22:07:01 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/23 16:15:00 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_env_val(char *key, char **env)
 				return (NULL);
 			tmp = ft_split(env[i], '=');
 			arg = ft_strdup(tmp[1]);
-			clear(tmp);
+			free_2d(&tmp);
 			return (arg);
 		}
 		i++;

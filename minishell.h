@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/23 12:37:13 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/23 16:16:07 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ void	skip_sp_ch(char **line, char ch);
 void	new_cmd(t_msh *msh, t_cmd **cmd, char **line);
 t_cmd	*last_cmd(t_cmd *cmd);
 char	*get_arg(t_msh *msh, char **line);
-void    mkline_dlch(char **out, char **line);
+void	mkline_dlch(char **out, char **line);
 void	change_cmd_line(t_msh *msh);
-void 	del_cap(t_msh *msh, int len);
-void 	clean_console(t_msh *msh, int *len);
+void	del_cap(t_msh *msh, int len);
+void	clean_console(t_msh *msh, int *len);
 void	set_history(t_msh *msh);
 void	init_history(t_msh *msh);
 

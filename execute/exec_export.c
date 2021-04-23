@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 10:07:52 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/21 11:08:35 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/23 16:15:51 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	declare(t_msh *msh, char ***env)
 		printf_fd(msh->fd, flag, split[0], split[1]);
 		clear(split);
 	}
-	clear(dup);
+	free_2d(&dup);
 	return (1);
 }
 

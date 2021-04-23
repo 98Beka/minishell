@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:21:48 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/19 21:04:34 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/23 16:12:36 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	del_env_val(char ***env, char *key)
 		if (ft_strcmp((*env)[s1], to_del))
 			new_env[--s2] = ft_strdup((*env)[s1]);
 	}
-	clear(*env);
+	free_2d(env);
 	*env = new_env;
 	return (1);
 }
