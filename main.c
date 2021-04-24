@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/22 20:12:32 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/23 21:01:55 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int		loop(t_msh *msh)
 	else
 		set_history(msh);
 	pars_line(msh, &msh->line);
-	set_fd(msh);
+	if (!set_fd(msh))
+		return (1);
 	while(*msh->cmd->arg)
 	{
 		if(!execute(msh))
@@ -65,7 +66,7 @@ int		main(int ac, char **av, char **envp)
 	msh.env = NULL;
 	init_history(&msh);
 	get_envp(envp, &msh);
-	set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
+	//set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
 	msh.shell_name = ft_strdup(av[0] + 2);	
 	set_termcap(&msh);
 	

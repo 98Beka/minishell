@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:26:57 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/23 16:12:49 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/24 11:45:54 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	check_cmd(t_msh *msh, char *cmd)
 	{
 		if (fstat(fd, statbuf) < 0)
 		{
-			ft_error(msh, NULL);
-			return (0);
+			close(fd);
+			return (ft_error(msh, NULL));
 		}
 		close(fd);
 	}

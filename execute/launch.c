@@ -6,48 +6,44 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/23 16:15:29 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/24 11:47:25 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdlib.h>
-#include <sys/_types/_pid_t.h>
-#include <sys/fcntl.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 
-
-int	exec_single_cmd(t_msh *msh, char *path, pid_t *pid)
+int	exec_single_cmd(t_msh *msh, char *path)
 {
-	*pid = fork();
-	if (*pid < 0)
-		ft_error(msh, NULL);
-	else if (*pid == 0)
+	pid_t pid;
+
+	if (msh->cmd->r_redir > 0)
+		dup2(msh->fd, 1);
+	if (!get_env_val("PATH", msh->env))
+		return (ft_error(msh, "No such file or directory"));
+	path = get_binary(msh, msh->cmd);
+	if (!path)
+		return (ft_error(msh, "command not found"));
+	//if ()
+	pid = fork();
+	if (pid < 0)
+		return (ft_error(msh, "123"));
+	else if (pid == 0)
 	{
-		path = get_binary(msh, msh->cmd);
-		if (!path)
-		{
-			ft_error(msh, "command not found");
-			return (1);
-		}
 		if (execve(path, msh->cmd->arg, msh->env) < 0)
-			ft_error(msh, NULL);
+			return (execve_error(msh, path));
 	}
 	else
-		waitpid(*pid, NULL, 0);
+		if (waitpid(pid, NULL, 0) < 0)
+			return (ft_error(msh, NULL));
 	return (1);
 }
 
-void	set_fd(t_msh *msh)
+int	set_fd(t_msh *msh)
 {
 	msh->fd = 1;
 	if (!msh->cmd->arg[1] && msh->cmd->r_redir != 0)
-	{
-		ft_error(msh, "syntax error near unexpected token `newline'");
-		return ;
-	}
+		return (ft_error(msh, "syntax error near unexpected token `newline'"));
 	if (msh->cmd->r_redir < 0)
 		msh->fd = 2;
 	else if (msh->cmd->r_redir == 1)
@@ -62,11 +58,12 @@ void	set_fd(t_msh *msh)
 		if (msh->fd < 0)
 			ft_error(msh, NULL);
 	}
+	return (1);
 }
 
 static void	set_pfd(t_msh *msh, int	i, int cmd)
 {
-	if (i == 0)	// FIRST CHILD
+	if (i == 0)
 	{
 		if (close(msh->pfd[i][STDIN_FILENO]) == -1)
 			ft_error(msh, "2");
@@ -75,7 +72,7 @@ static void	set_pfd(t_msh *msh, int	i, int cmd)
 		if (close(msh->pfd[i][STDOUT_FILENO]) == -1)
 			ft_error(msh, "4");
 	}
-	else if (i == cmd - 1)	// LAST CHILD
+	else if (i == cmd - 1)
 	{
 		if (dup2(msh->pfd[i - 1][STDIN_FILENO], STDIN_FILENO) == -1)
 			ft_error(msh, "5");
@@ -84,14 +81,14 @@ static void	set_pfd(t_msh *msh, int	i, int cmd)
 		if (close(msh->pfd[i - 1][STDOUT_FILENO]) == -1)
 			ft_error(msh, "7");
 	}
-	else 	// MIDDLE CHILD
+	else
 	{
 		if (dup2(msh->pfd[i - 1][STDIN_FILENO], STDIN_FILENO) == -1)
 			ft_error(msh, "8");
 		if (dup2(msh->pfd[i][STDOUT_FILENO], STDOUT_FILENO) == -1)
 			ft_error(msh, "9");
 		if (close(msh->pfd[i - 1][STDIN_FILENO]) == -1)
-			ft_error(msh, "10");
+			ft_error(msh, "101");
 		if (close(msh->pfd[i - 1][STDOUT_FILENO]) == -1)
 			ft_error(msh, "11");
 		if (close(msh->pfd[i][STDIN_FILENO]) == -1)
@@ -104,38 +101,41 @@ static void	set_pfd(t_msh *msh, int	i, int cmd)
 int	exec_piped_cmd(t_msh *msh, t_cmd *cmnd, char *path, pid_t *pid)
 {
 	int	i;
-
+	
 	i = -1;
 	while (cmnd)
 	{
 		++i;
+		if (cmnd->r_redir || cmnd->l_redir || cmnd->dbl_r_redir)
+			exec_redirect(msh, cmnd);
 		path = get_binary(msh, cmnd);
 		if (!path)
 		{
 			free(path);
-			ft_error(msh, "command not found");
-			return (0);
+			return (ft_error(msh, "command not found"));
 		}
 		pid[i] = fork();
 		if (pid[i] == -1)
-			ft_error(msh, "0");
+			return (ft_error(msh, "0"));
 		else if (pid[i] == 0)
 		{
 			set_pfd(msh, i , msh->cmd_count);
-			execve(path, cmnd->arg, msh->env);
+			if (execve(path, (cmnd)->arg, msh->env) < 0)
+				return (execve_error(msh, path));
 		}
 		else
 		{
 			if (i != 0)
 			{
 				if (close(msh->pfd[i - 1][STDIN_FILENO]) == -1)
-					ft_error(msh, "14");
+					return (ft_error(msh, "14"));
 				if (close(msh->pfd[i - 1][STDOUT_FILENO]) == -1)
-					ft_error(msh, "15");
+					return (ft_error(msh, "15"));
 			}
-			waitpid(pid[i], NULL, 0);
+			if (waitpid(pid[i], NULL, 0) < 0)
+				return (ft_error(msh, NULL));
 		}
-		cmnd = cmnd->next;
+		cmnd = (cmnd)->next;
 	}
 	return (1);
 }
@@ -165,7 +165,7 @@ static int	num_of_pipes(t_cmd **cmd)
 	i = 0;
 	while (tmp)
 	{
-		if (tmp->pipe > 0)
+		if (tmp->pipe)
 			i++;
 		tmp = tmp->next;
 	}
@@ -178,13 +178,13 @@ static int	prepare_data(t_msh *msh, pid_t **pid)
 
 	msh->cmd_count = num_of_cmds(&msh->cmd);
 	msh->pipe_count = num_of_pipes(&msh->cmd);
+	msh->pipe_count = msh->cmd_count - 1;
 	msh->pfd = (int **)malloc(sizeof(int *) * (msh->cmd_count - 1));
 	if (!msh->pfd)
 		return (0);
 	i = -1;
 	while (++i < msh->cmd_count - 1)
 		msh->pfd[i] = (int *)malloc(sizeof(int) * 2);
-	msh->pipe_count = msh->cmd_count - 1;
 	*pid = (pid_t *)malloc(sizeof(pid) * msh->cmd_count);
 	if (!*pid)
 		return (0);
@@ -199,13 +199,11 @@ static int	prepare_data(t_msh *msh, pid_t **pid)
 
 int	launch(t_msh *msh)
 {
-	t_cmd	*cmnd;
 	pid_t	*pid;
 	int		i;
 	char	*path;
 
 	path = NULL;
-	cmnd = msh->cmd;
 	if (!prepare_data(msh, &pid))
 		return (1);
 	i = -1;
@@ -215,8 +213,7 @@ int	launch(t_msh *msh)
 			return (1);
 	}
 	else
-		exec_single_cmd(msh, path, pid);
-	
+		exec_single_cmd(msh, path);
 	free (path);
 	return (1);
 }

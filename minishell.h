@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/23 16:16:07 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/24 11:48:23 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # include "./utils/ft_arr/ft_arr.h"
 # include <signal.h>
 # include <term.h>
+# include <sys/_types/_pid_t.h>
+# include <sys/fcntl.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <dirent.h>
 
 # define BUFF_SIZE 4096
 # define CMD	0b10000000
@@ -38,6 +43,7 @@ typedef struct s_cmd
 {
 	int				pipe;
 	int				r_redir;
+	int				dbl_r_redir;
 	int				l_redir;
 	char			*file;
 	char			**arg;
@@ -61,6 +67,7 @@ typedef struct s_msh
 	char			buff[BUFF_SIZE];
 	int				cmd_count;
 	int				pipe_count;
+	DIR 			*dir;
 	struct termios	term;
 }t_msh;
 
@@ -78,7 +85,9 @@ int		exec_cd(t_msh *msh);
 int		exec_export(t_msh *msh);
 int		exec_unset(t_msh *msh);
 int		exec_echo(t_msh *msh);
-void	set_fd(t_msh *msh);
+int		exec_redirect(t_msh *msh, t_cmd *cmnd);
+int		execve_error(t_msh *msh, char *path);
+int		set_fd(t_msh *msh);
 
 int		ft_error(t_msh *msh, char *msg);
 int		set_termcap(t_msh *msh);

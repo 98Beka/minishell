@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   execve_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/03 17:04:29 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/24 10:39:11 by hveiled          ###   ########.fr       */
+/*   Created: 2021/04/23 20:40:16 by hveiled           #+#    #+#             */
+/*   Updated: 2021/04/23 21:01:02 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	error_prompt(t_msh *msh, char *err_msg)
+int	execve_error(t_msh *msh, char *path)
 {
-	int		i;
-	int		n;
-
-	i = 0;
-	n = 1;
-	msh->fd = 2;
-	if (msh->cmd->arg[1])
-		n = 2;
-	ft_putstr_fd("minishell: ", msh->fd);
-	while (i < n)
+	if (!ft_strncmp(path, "./", 2))
+		ft_error(msh, "permission denied");
+	else if (ft_strchr(path, '/'))
 	{
-		ft_putstr_fd(msh->cmd->arg[i++], msh->fd);
-		ft_putstr_fd(": ", msh->fd);
+		msh->dir = opendir(path);
+		if (!(msh->dir))
+			ft_error(msh, "no such file or directory");
+		else
+		{
+			ft_error(msh, "is a directory");
+			closedir(msh->dir);
+		}
 	}
-	ft_putendl_fd(err_msg, msh->fd);
-}
-
-int	ft_error(t_msh *msh, char *msg)
-{
-	if (msg)
-		error_prompt(msh, msg);
-	else
-		error_prompt(msh, strerror(errno));
+	free(path);
 	return (0);
 }

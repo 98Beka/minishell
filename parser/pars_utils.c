@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:30:52 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/17 06:40:52 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/24 10:18:24 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void new_cmd(t_msh *msh, t_cmd **cmd, char **line)
 	(*cmd)->arg = NULL;
 	(*cmd)->l_redir = 0;
 	(*cmd)->r_redir = 0;
-	(*cmd)->pipe = 0;
+	(*cmd)->pipe = 1;
 	(*cmd)->arg = new_2d(0);
 	add_l_line(&(*cmd)->arg, get_arg(msh, line));
 	add_l_line(&(*cmd)->arg, get_arg(msh, line));
