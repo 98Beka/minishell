@@ -6,7 +6,7 @@
 #    By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/04/24 11:48:37 by hveiled          ###   ########.fr        #
+#    Updated: 2021/04/24 13:06:41 by hveiled          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS = \
 		execute/exec_echo.c \
 		execute/exec_child.c \
 		execute/exec_redirect.c \
+		execute/exec_piped_cmd.c \
 		execute/launch.c \
 		execute/ft_error.c \
 		execute/execve_error.c

@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/24 11:47:25 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/24 13:04:28 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,84 +61,84 @@ int	set_fd(t_msh *msh)
 	return (1);
 }
 
-static void	set_pfd(t_msh *msh, int	i, int cmd)
-{
-	if (i == 0)
-	{
-		if (close(msh->pfd[i][STDIN_FILENO]) == -1)
-			ft_error(msh, "2");
-		if (dup2(msh->pfd[i][STDOUT_FILENO], STDOUT_FILENO) == -1)
-			ft_error(msh, "3");
-		if (close(msh->pfd[i][STDOUT_FILENO]) == -1)
-			ft_error(msh, "4");
-	}
-	else if (i == cmd - 1)
-	{
-		if (dup2(msh->pfd[i - 1][STDIN_FILENO], STDIN_FILENO) == -1)
-			ft_error(msh, "5");
-		if (close(msh->pfd[i - 1][STDIN_FILENO]) == -1)
-			ft_error(msh, "6");
-		if (close(msh->pfd[i - 1][STDOUT_FILENO]) == -1)
-			ft_error(msh, "7");
-	}
-	else
-	{
-		if (dup2(msh->pfd[i - 1][STDIN_FILENO], STDIN_FILENO) == -1)
-			ft_error(msh, "8");
-		if (dup2(msh->pfd[i][STDOUT_FILENO], STDOUT_FILENO) == -1)
-			ft_error(msh, "9");
-		if (close(msh->pfd[i - 1][STDIN_FILENO]) == -1)
-			ft_error(msh, "101");
-		if (close(msh->pfd[i - 1][STDOUT_FILENO]) == -1)
-			ft_error(msh, "11");
-		if (close(msh->pfd[i][STDIN_FILENO]) == -1)
-			ft_error(msh, "12");
-		if (close(msh->pfd[i][STDOUT_FILENO]) == -1)
-			ft_error(msh, "13");
-	}
-}
+//static void	set_pfd(t_msh *msh, int	i, int cmd)
+//{
+//	if (i == 0)
+//	{
+//		if (close(msh->pfd[i][STDIN_FILENO]) == -1)
+//			ft_error(msh, "2");
+//		if (dup2(msh->pfd[i][STDOUT_FILENO], STDOUT_FILENO) == -1)
+//			ft_error(msh, "3");
+//		if (close(msh->pfd[i][STDOUT_FILENO]) == -1)
+//			ft_error(msh, "4");
+//	}
+//	else if (i == cmd - 1)
+//	{
+//		if (dup2(msh->pfd[i - 1][STDIN_FILENO], STDIN_FILENO) == -1)
+//			ft_error(msh, "5");
+//		if (close(msh->pfd[i - 1][STDIN_FILENO]) == -1)
+//			ft_error(msh, "6");
+//		if (close(msh->pfd[i - 1][STDOUT_FILENO]) == -1)
+//			ft_error(msh, "7");
+//	}
+//	else
+//	{
+//		if (dup2(msh->pfd[i - 1][STDIN_FILENO], STDIN_FILENO) == -1)
+//			ft_error(msh, "8");
+//		if (dup2(msh->pfd[i][STDOUT_FILENO], STDOUT_FILENO) == -1)
+//			ft_error(msh, "9");
+//		if (close(msh->pfd[i - 1][STDIN_FILENO]) == -1)
+//			ft_error(msh, "101");
+//		if (close(msh->pfd[i - 1][STDOUT_FILENO]) == -1)
+//			ft_error(msh, "11");
+//		if (close(msh->pfd[i][STDIN_FILENO]) == -1)
+//			ft_error(msh, "12");
+//		if (close(msh->pfd[i][STDOUT_FILENO]) == -1)
+//			ft_error(msh, "13");
+//	}
+//}
 
-int	exec_piped_cmd(t_msh *msh, t_cmd *cmnd, char *path, pid_t *pid)
-{
-	int	i;
+//int	exec_piped_cmd(t_msh *msh, t_cmd *cmnd, char *path, pid_t *pid)
+//{
+//	int	i;
 	
-	i = -1;
-	while (cmnd)
-	{
-		++i;
-		if (cmnd->r_redir || cmnd->l_redir || cmnd->dbl_r_redir)
-			exec_redirect(msh, cmnd);
-		path = get_binary(msh, cmnd);
-		if (!path)
-		{
-			free(path);
-			return (ft_error(msh, "command not found"));
-		}
-		pid[i] = fork();
-		if (pid[i] == -1)
-			return (ft_error(msh, "0"));
-		else if (pid[i] == 0)
-		{
-			set_pfd(msh, i , msh->cmd_count);
-			if (execve(path, (cmnd)->arg, msh->env) < 0)
-				return (execve_error(msh, path));
-		}
-		else
-		{
-			if (i != 0)
-			{
-				if (close(msh->pfd[i - 1][STDIN_FILENO]) == -1)
-					return (ft_error(msh, "14"));
-				if (close(msh->pfd[i - 1][STDOUT_FILENO]) == -1)
-					return (ft_error(msh, "15"));
-			}
-			if (waitpid(pid[i], NULL, 0) < 0)
-				return (ft_error(msh, NULL));
-		}
-		cmnd = (cmnd)->next;
-	}
-	return (1);
-}
+//	i = -1;
+//	while (cmnd)
+//	{
+//		++i;
+//		if (cmnd->r_redir || cmnd->l_redir || cmnd->dbl_r_redir)
+//			exec_redirect(msh, cmnd);
+//		path = get_binary(msh, cmnd);
+//		if (!path)
+//		{
+//			free(path);
+//			return (ft_error(msh, "command not found"));
+//		}
+//		pid[i] = fork();
+//		if (pid[i] == -1)
+//			return (ft_error(msh, "0"));
+//		else if (pid[i] == 0)
+//		{
+//			set_pfd(msh, i , msh->cmd_count);
+//			if (execve(path, (cmnd)->arg, msh->env) < 0)
+//				return (execve_error(msh, path));
+//		}
+//		else
+//		{
+//			if (i != 0)
+//			{
+//				if (close(msh->pfd[i - 1][STDIN_FILENO]) == -1)
+//					return (ft_error(msh, "14"));
+//				if (close(msh->pfd[i - 1][STDOUT_FILENO]) == -1)
+//					return (ft_error(msh, "15"));
+//			}
+//			if (waitpid(pid[i], NULL, 0) < 0)
+//				return (ft_error(msh, NULL));
+//		}
+//		cmnd = (cmnd)->next;
+//	}
+//	return (1);
+//}
 
 static int	num_of_cmds(t_cmd **cmd)
 {
