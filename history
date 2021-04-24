@@ -891,3 +891,24 @@ ls |
 ls
 ls 
 ls |
+ls
+cd
+exit
+ls
+ls | cat -e
+exit
+ls
+ls
+ls
+ls
+ls
+ls | cat -e
+exit
+ls
+ls
+ls
+ls
+ls
+ls
+ls | cat -e
+exit

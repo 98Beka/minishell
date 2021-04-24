@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 10:07:52 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/23 16:15:51 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/24 21:39:05 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	declare(t_msh *msh, char ***env)
 	char	**dup;
 	char	**split;
 	char	*flag;
-	
+
 	dup = ft_arrdup(*env);
 	i = -1;
 	sort_envp(&dup);
@@ -69,12 +69,10 @@ int	declare(t_msh *msh, char ***env)
 int	exec_export(t_msh *msh)
 {
 	char	**var;
-	
+
 	var = NULL;
 	if (msh->cmd->arg[1] == NULL)
 		return (declare(msh, &msh->env));
-	// else if (!check_key(msh->cmd->arg[1]))
-	// 	return (1);
 	else
 	{
 		if (ft_strchr(msh->cmd->arg[1], '='))

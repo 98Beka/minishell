@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:21:48 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/23 16:12:36 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/24 21:59:57 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*find_del_key(char ****env, int *s1, char **key)
 		del = ft_strlen(*key);
 		if (((ft_strnstr(envp[i], *key, del)) && (envp[i][del] == '='))
 			|| ((ft_strnstr(envp[i], *key, del)) && (envp[i][del]) == '\0'))
-				found = envp[i];
+			found = envp[i];
 		i++;
 	}
 	*s1 = i;
