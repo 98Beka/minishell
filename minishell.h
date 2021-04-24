@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/24 13:06:51 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/24 15:38:46 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		execve_error(t_msh *msh, char *path);
 int		set_fd(t_msh *msh);
 //void	set_pfd(t_msh *msh, int i, int cmd);
 
-int		ft_error(t_msh *msh, char *msg);
+int		ft_error(t_msh *msh, char *msg, t_cmd *cmd);
 int		set_termcap(t_msh *msh);
 int		shell_prompt(t_msh *msh, char *bf, int len, int l, ssize_t stp);
 //int		exec_bin(t_msh *msh);

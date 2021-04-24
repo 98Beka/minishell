@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/24 13:04:28 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/24 21:18:19 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,28 @@ int	exec_single_cmd(t_msh *msh, char *path)
 {
 	pid_t pid;
 
-	if (msh->cmd->r_redir > 0)
-		dup2(msh->fd, 1);
+	//msh->cmd->r_redir = 1;
+	//msh->cmd->file = "./qwe";
 	if (!get_env_val("PATH", msh->env))
-		return (ft_error(msh, "No such file or directory"));
+		return (ft_error(msh, "No such file or directory", NULL));
 	path = get_binary(msh, msh->cmd);
 	if (!path)
-		return (ft_error(msh, "command not found"));
-	//if ()
+		return (ft_error(msh, "command not found", NULL));
+	if (msh->cmd->r_redir || msh->cmd->l_redir || msh->cmd->dbl_r_redir)
+		exec_redirect(msh, msh->cmd);
 	pid = fork();
 	if (pid < 0)
-		return (ft_error(msh, "123"));
+		return (ft_error(msh, "123", NULL));
 	else if (pid == 0)
 	{
 		if (execve(path, msh->cmd->arg, msh->env) < 0)
 			return (execve_error(msh, path));
 	}
 	else
+	{
 		if (waitpid(pid, NULL, 0) < 0)
-			return (ft_error(msh, NULL));
+			return (ft_error(msh, NULL, NULL));
+	}
 	return (1);
 }
 
@@ -43,20 +46,20 @@ int	set_fd(t_msh *msh)
 {
 	msh->fd = 1;
 	if (!msh->cmd->arg[1] && msh->cmd->r_redir != 0)
-		return (ft_error(msh, "syntax error near unexpected token `newline'"));
+		return (ft_error(msh, "syntax error unexpected token `newline'", NULL));
 	if (msh->cmd->r_redir < 0)
 		msh->fd = 2;
 	else if (msh->cmd->r_redir == 1)
 	{
 		msh->fd = open(msh->cmd->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (msh->fd < 0)
-			ft_error(msh, NULL);
+			ft_error(msh, NULL, NULL);
 	}
 	else if (msh->cmd->r_redir == 2)
 	{
 		msh->fd = open(msh->cmd->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (msh->fd < 0)
-			ft_error(msh, NULL);
+			ft_error(msh, NULL, NULL);
 	}
 	return (1);
 }
@@ -192,7 +195,7 @@ static int	prepare_data(t_msh *msh, pid_t **pid)
 	while (++i < msh->pipe_count)
 	{
 		if (pipe(msh->pfd[i]) == -1)
-			ft_error(msh, NULL);
+			ft_error(msh, NULL, NULL);
 	}
 	return (1);
 }

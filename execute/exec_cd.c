@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:23:20 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/23 16:12:02 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/24 15:31:15 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		exec_cd_home(t_msh *msh)
 		return (0);
 	set_env_val(&msh->env, ft_strdup("PWD"), value);
 	if (chdir(value) < 0)
-		ft_error(msh, NULL);
+		ft_error(msh, NULL, NULL);
 	free(value);
 	return (1);
 }
@@ -33,7 +33,7 @@ int		exec_cd_previous_dir(t_msh *msh)
 	
 	tmp = getenv("PWD");
 	if (!getcwd(tmp, BUFF_SIZE))
-		return (ft_error(msh, NULL));
+		return (ft_error(msh, NULL, NULL));
 	value = get_env_val("OLDPWD", msh->env);
 	//printf("%s\n", value);
 	//printf("%s\n", msh->cmd->arg[0]);
@@ -51,7 +51,7 @@ int		exec_cd_previous_dir(t_msh *msh)
 		{
 			free(value);
 			free(tmp);
-			return (ft_error(msh, NULL));
+			return (ft_error(msh, NULL, NULL));
 		}
 		set_env_val(&msh->env, ft_strdup("PWD"), value);
 		set_env_val(&msh->env, ft_strdup("OLDPWD"), tmp);
@@ -65,7 +65,7 @@ int		exec_cd_previous_dir(t_msh *msh)
 int		exec_cd_dir(t_msh *msh)
 {
 	if (chdir(msh->cmd->arg[1]) < 0)
-		ft_error(msh, NULL);
+		ft_error(msh, NULL, NULL);
 	else
 	{
 		getcwd(msh->buff, BUFF_SIZE);
@@ -91,7 +91,7 @@ int		exec_cd(t_msh *msh)
 	else
 	{
 		if (!getcwd(value, BUFF_SIZE))
-			return (ft_error(msh, NULL));
+			return (ft_error(msh, NULL, NULL));
 		set_env_val(&msh->env, ft_strdup("OLDPWD"), value);
 		exec_cd_dir(msh);
 	}
