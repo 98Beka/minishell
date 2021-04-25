@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/24 21:44:18 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/25 12:21:57 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,19 +95,18 @@ int	launch(t_msh *msh)
 {
 	pid_t	*pid;
 	int		i;
-	char	*path;
 
-	path = NULL;
+	msh->path = NULL;
 	if (!prepare_data(msh, &pid))
 		return (1);
 	i = -1;
 	if (msh->pipe_count != 0)
 	{
-		if (!exec_piped_cmd(msh, msh->cmd, path, pid))
+		if (!exec_piped_cmd(msh, msh->cmd, msh->path, pid))
 			return (1);
 	}
 	else
-		exec_single_cmd(msh, path);
-	free (path);
+		exec_single_cmd(msh, msh->path);
+	free (msh->path);
 	return (1);
 }

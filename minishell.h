@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/24 21:42:59 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/25 12:21:18 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_msh
 	char			buff[BUFF_SIZE];
 	int				cmd_count;
 	int				pipe_count;
+	char			*path;
 	DIR 			*dir;
 	struct termios	term;
 }t_msh;
