@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/25 12:21:18 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/26 14:27:37 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,14 @@ int		exec_piped_cmd(t_msh *msh, t_cmd *cmnd, char *path, pid_t *pid);
 int		exec_single_cmd(t_msh *msh, char *path);
 int		execve_error(t_msh *msh, char *path);
 int		set_fd(t_msh *msh);
+void	sigint(int sn);
+void	sigquit(int sn);
+void	sigcat(int sn);
 //void	set_pfd(t_msh *msh, int i, int cmd);
 
 int		ft_error(t_msh *msh, char *msg, t_cmd *cmd);
 int		set_termcap(t_msh *msh);
-int		shell_prompt(t_msh *msh, char *bf, int len, int l, ssize_t stp);
+int		shell_prompt(t_msh *msh, int len, int l, ssize_t stp);
 //int		exec_bin(t_msh *msh);
 //char	*get_binary(t_msh *msh);
 char	*get_binary(t_msh *msh, t_cmd *cmd);

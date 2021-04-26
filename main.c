@@ -6,11 +6,13 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/24 16:30:07 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/26 13:16:22 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils/libft/libft.h"
+#include <sys/signal.h>
 
 int		execute(t_msh *msh)
 {
@@ -39,7 +41,7 @@ int		loop(t_msh *msh)
 {
 	msh->line = NULL;
 	ft_putstr_fd("minishell > ", 1);
-	if (!shell_prompt(msh, msh->buff, 0, 0, 0))
+	if (!shell_prompt(msh, 0, 0, 0))
 		exec_exit(msh);
 	if (!msh->line)
 		msh->line = ft_strdup("");
@@ -69,6 +71,9 @@ int		main(int ac, char **av, char **envp)
 	set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
 	msh.shell_name = ft_strdup(av[0] + 2);	
 	set_termcap(&msh);
+	signal(SIGINT, sigint);
+	signal(SIGQUIT, sigquit);
+	//signal(SIGQUIT, sigcat);
 	while (loop(&msh))
 		NULL;
 	return (0);
