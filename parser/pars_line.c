@@ -3,46 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   pars_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:39:49 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 14:27:28 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:20:14 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	pip(t_msh *msh, char **line)
+static void pip(t_msh *msh, char **line)
 {
 	msh->cmd->pipe = 1;
 	skip_sp_ch(line, '|');
-	new_cmd(msh, &(last_cmd(msh->cmd)->next), line);
+	new_cmd(&(last_cmd(msh->cmd)->next));
+	
 }
 
-static void	redir(t_msh *msh, char **line, int *dir, char ch)
+static void redir(t_msh *msh, char **line, int *dir, char ch)
 {
 	*dir = 1;
+	skip_sp_ch(line, ch);
+	if (**line == '>')
+		msh->cmd->dbl_r_redir = 1;	
 	skip_sp_ch(line, ch);
 	last_cmd(msh->cmd)->file = get_arg(msh, line);
 }
 
 int	pars_line(t_msh *msh, char **line)
 {
-	new_cmd(msh, &msh->cmd, line);
+	new_cmd(&msh->cmd);
 	while (*line && **line && **line != ';')
 	{
+		skip_sp_ch(line, ' ');
 		if (**line == '|')
 			pip(msh, line);
 		else if (**line == '<' || **line == '>')
 		{
-			if ((*line)[0] == '<')
-				redir(msh, line, &(last_cmd(msh->cmd)->l_redir), '<');
-			else
-				redir(msh, line, &(last_cmd(msh->cmd)->r_redir), '>');
-			break ;
+				if ((*line)[0] == '<')
+					redir(msh, line, &(last_cmd(msh->cmd)->l_redir), '<');
+				else
+					redir(msh, line, &(last_cmd(msh->cmd)->r_redir), '>');
+			return 1;
 		}
-		else
-			add_l_line(&(msh->cmd)->arg, get_arg(msh, line));
+		else 
+		add_l_line(&(last_cmd(msh->cmd)->arg), get_arg(msh, line));
 	}
-	return (1);
+	return 1;
 }
+

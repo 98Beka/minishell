@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 14:27:37 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/26 14:59:11 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ int		exec_child(t_msh *msh, char *bin_path);
 int		exec_parent(t_msh *msh, char *bin_path);
 void	skip_sp(char **line);
 void	skip_sp_ch(char **line, char ch);
-void	new_cmd(t_msh *msh, t_cmd **cmd, char **line);
+void	new_cmd(t_cmd **cmd);
 t_cmd	*last_cmd(t_cmd *cmd);
-char	*get_arg(t_msh *msh, char **line);
+char    *get_arg(t_msh *msh, char **line);
 void	mkline_dlch(char **out, char **line);
 void	change_cmd_line(t_msh *msh);
 void	del_cap(t_msh *msh, int len);

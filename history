@@ -1395,3 +1395,12 @@ ls
 ls | ls
 ls | ls | ls
 ls | cat -e
+ls | ls
+ls | ls | ls
+exit
+ls
+echo $
+ls
+ls
+ls
+ls | ls

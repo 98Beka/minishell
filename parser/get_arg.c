@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/24 21:54:44 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/26 14:59:40 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ static char	set_flags(char ch, t_msh *msh, char **line)
 	return (ch);
 }
 
-char	*get_arg(t_msh *msh, char **line)
+char            *get_arg(t_msh *msh, char **line)
 {
 	char	*out;
-
+	
 	out = NULL;
 	msh->pf = F_NONE;
 	skip_sp(line);
@@ -77,14 +77,12 @@ char	*get_arg(t_msh *msh, char **line)
 			msh->pf = msh->pf & ~SHL;
 		}
 		if (msh->pf & SNGL)
-		//{
-			while (**line && **line != '\'' && !is_end(msh->pf, **line))
-				mkline_dlch(&out, line);
-			if (**line == '$')
-				dollar(msh, line);
-			if (**line && !(msh->pf & SNGL) && **line != '\"')
-				mkline_dlch(&out, line);
-		//}
+            while(**line && **line != '\'' && !is_end(msh->pf, **line))
+                mkline_dlch(&out, line);
+        if (**line == '$')
+            dollar(msh, line);
+        if (**line && !(msh->pf & SNGL) && **line != '\"')
+            mkline_dlch(&out, line);
 	}
 	return (out);
 }
