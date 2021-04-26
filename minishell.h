@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 14:59:11 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/26 22:48:30 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_msh
 	int				pipe_count;
 	char			*path;
 	DIR 			*dir;
+	int				code;
 	struct termios	term;
 }t_msh;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:39:49 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 15:20:14 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/26 16:32:30 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,19 @@ static void pip(t_msh *msh, char **line)
 
 static void redir(t_msh *msh, char **line, int *dir, char ch)
 {
-	*dir = 1;
 	skip_sp_ch(line, ch);
 	if (**line == '>')
-		msh->cmd->dbl_r_redir = 1;	
+		msh->cmd->dbl_r_redir = 1;
+	else
+		*dir = 1;
 	skip_sp_ch(line, ch);
 	last_cmd(msh->cmd)->file = get_arg(msh, line);
 }
 
 int	pars_line(t_msh *msh, char **line)
 {
+	if (**line == ';')
+		del_to_index(line, 1);
 	new_cmd(&msh->cmd);
 	while (*line && **line && **line != ';')
 	{

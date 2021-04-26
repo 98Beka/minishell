@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 17:53:50 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/24 21:40:14 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/26 19:07:58 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	parent_do(t_msh *msh, int i, pid_t *pid)
 		if (close(msh->pfd[i - 1][STDOUT_FILENO]) == -1)
 			return (ft_error(msh, "15", NULL));
 	}
-	if (waitpid(pid[i], NULL, 0) < 0)
+	if (waitpid(pid[i], &msh->code, 0) < 0)
 		return (ft_error(msh, "16", NULL));
 	return (1);
 }

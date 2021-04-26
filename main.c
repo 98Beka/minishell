@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 15:20:34 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/26 23:00:51 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,14 @@ int		main(int ac, char **av, char **envp)
 	set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
 	msh.shell_name = ft_strdup(av[0] + 2);	
 	set_termcap(&msh);
-	
-	msh.line = ft_strdup("ls | ls");
-	pars_line(&msh, &msh.line);
-	
-	
-	printf("%s\n", msh.cmd->arg[0]);
-	printf("%s\n", msh.cmd->arg[1]);
-	msh.cmd = msh.cmd->next;
-	printf("%s\n", msh.cmd->arg[0]);
-	printf("%s\n", msh.cmd->arg[1]);
-	
-	// signal(SIGINT, sigint);
-	// signal(SIGQUIT, sigquit);
+	//msh.line = ft_strdup("ls > 5");
+	//pars_line(&msh, &msh.line);
+
+	//loop(&msh);
+	signal(SIGINT, sigint);
+	signal(SIGQUIT, sigquit);
 	//signal(SIGQUIT, sigcat);
-	// while (loop(&msh))
-	// 	NULL;
+	 while (loop(&msh))
+	 	NULL;
 	return (0);
 }

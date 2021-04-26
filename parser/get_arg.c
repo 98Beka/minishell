@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/26 14:59:40 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/26 16:11:55 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,26 @@ static char	get_flags(char ch, char **line)
 	return (ch);
 }
 
-static void	dollar(t_msh *msh, char **line)
+static void dollar(t_msh *msh, char **line)
 {
-	int		i;
-	char	*d;
-	char	*tmp;
-
-	(void)msh;
-	del_at_index(line, 0);
-	while (line && **line && **line != ' '
-		&& **line != '\"' && **line != '$')
-		mkline_dlch(&d, line);
-	tmp = get_env_val(d, msh->env);
-	i = -1;
-	if (!tmp)
-		return ;
-	while (tmp[++i])
-		add_char_index(line, tmp[i], i);
-	free(tmp);
+    int     i;
+    char    *d;
+    char    *tmp;
+    d = ft_strdup("");
+    del_at_index(line, 0);
+    while (line && **line && **line != ' '
+        && **line != '\"' && **line != '$')
+        mkline_dlch(&d, line);
+    tmp = get_env_val(d, msh->env);
+    if(!*d)
+        tmp = ft_strdup("$");
+    i = -1;
+    if (!tmp)
+        return ;
+    while (tmp[++i])
+        add_char_index(line, tmp[i], i);
+    free(tmp);
+    free(d);
 }
 
 static char	set_flags(char ch, t_msh *msh, char **line)
