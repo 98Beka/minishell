@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 18:59:24 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/18 04:59:08 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/27 16:58:05 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void init_history(t_msh *msh)
+void    init_history(t_msh *msh)
 {
     int fd;
     char *line;

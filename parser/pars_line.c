@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:39:49 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 16:32:30 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/27 18:13:30 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	pars_line(t_msh *msh, char **line)
 			pip(msh, line);
 		else if (**line == '<' || **line == '>')
 		{
-				if ((*line)[0] == '<')
-					redir(msh, line, &(last_cmd(msh->cmd)->l_redir), '<');
-				else
-					redir(msh, line, &(last_cmd(msh->cmd)->r_redir), '>');
-			return 1;
+			if ((*line)[0] == '<')
+				redir(msh, line, &(last_cmd(msh->cmd)->l_redir), '<');
+			else
+				redir(msh, line, &(last_cmd(msh->cmd)->r_redir), '>');
+			//return 1;
 		}
 		else 
 		add_l_line(&(last_cmd(msh->cmd)->arg), get_arg(msh, line));
