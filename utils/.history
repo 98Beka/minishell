@@ -1,0 +1,11 @@
+echo $?
+ls sdsdsd
+echo $?
+echo $?
+cd dsdsd
+echo $?
+echo $?
+cd util
+echo $?
+echo $?
+cd -

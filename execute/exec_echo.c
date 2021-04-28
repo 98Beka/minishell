@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:12:04 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 16:11:03 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 12:46:18 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	exec_echo(t_msh *msh)
 			print_echo(msh, msh->cmd->arg);
 		write (msh->fd, "\n", 1);
 	}
+	msh->code = 0;
 	return (1);
 }

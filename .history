@@ -22,3 +22,42 @@ exit
 exit
 ls
 exit
+sdsd
+echo $?
+cd utils
+cd utils
+cd rerer
+echo $?
+lss
+echo $?
+ls
+echo $?
+cdcd
+echo $?
+echo $?
+echo 4
+echo $?
+ls
+echo $?
+ls sds
+echo $?
+ls
+echo $?
+cd utils
+ls
+cd ru
+echo $?
+cd utils
+ls
+pwd
+ls
+ls
+echo $?
+ls
+ls > 1 > 2 > 3
+rm 1 2 3
+ls
+exit
+ls
+ls
+ls

@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 17:53:50 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/27 18:34:29 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 12:34:58 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,10 @@ int	child_do(t_msh *msh, t_cmd *cmnd, char *path, int i)
 {
 	set_pfd(msh, i, msh->cmd_count);
 	path = get_binary(msh, cmnd);
-	if (!path)
+	{
+		msh->code = 127;
 		return (ft_error(msh, "command not found", cmnd));
+	}
 	if (cmnd->r_redir || cmnd->l_redir || cmnd->dbl_r_redir)
 		exec_redirect(msh, cmnd);
 	if (execve(path, (cmnd)->arg, msh->env))

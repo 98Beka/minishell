@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:23:20 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/24 21:38:27 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 12:48:07 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ int	exec_cd_previous_dir(t_msh *msh)
 int	exec_cd_dir(t_msh *msh)
 {
 	if (chdir(msh->cmd->arg[1]) < 0)
+	{
+		msh->code = 1;
 		ft_error(msh, NULL, NULL);
+	}
 	else
 	{
 		getcwd(msh->buff, BUFF_SIZE);
@@ -83,6 +86,7 @@ int	exec_cd(t_msh *msh)
 {
 	char	*value;
 
+	msh->code = 0;
 	value = NULL;
 	value = get_env_val("PWD", msh->env);
 	if (!ft_strcmp(msh->cmd->arg[1], "--") || !ft_strcmp(msh->cmd->arg[1], "~")
