@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 23:00:51 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 11:43:11 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,18 @@ int		main(int ac, char **av, char **envp)
 {
 	(void)ac;
 	t_msh	msh;
+	
 	msh.env = NULL;
 	init_history(&msh);
+
 	get_envp(envp, &msh);
 	set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
 	msh.shell_name = ft_strdup(av[0] + 2);	
 	set_termcap(&msh);
-	//msh.line = ft_strdup("ls > 5");
-	//pars_line(&msh, &msh.line);
-
-	//loop(&msh);
 	signal(SIGINT, sigint);
 	signal(SIGQUIT, sigquit);
-	//signal(SIGQUIT, sigcat);
-	 while (loop(&msh))
+	while (loop(&msh))
 	 	NULL;
+	
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:39:49 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/27 18:13:30 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 10:56:02 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,16 @@ static void redir(t_msh *msh, char **line, int *dir, char ch)
 	if (**line == '>')
 		msh->cmd->dbl_r_redir = 1;
 	else
+	{
+		if (*dir)
+		{
+		close(open(msh->cmd->file, O_CREAT, 0644));
+		free(msh->cmd->file);
+		}
 		*dir = 1;
+	}
 	skip_sp_ch(line, ch);
+	
 	last_cmd(msh->cmd)->file = get_arg(msh, line);
 }
 

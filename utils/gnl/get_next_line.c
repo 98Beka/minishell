@@ -3,89 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:30:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/02 17:38:08 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 11:09:08 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_remain(char *remain)
+static char	*ft_strjoingnl(char const *s1, char const *s2)
 {
-	char	*str;
-	int		i;
-	int		j;
+	char	*p;
+	size_t	t1;
+	size_t	t2;
+	size_t	t3;
 
-	i = 0;
-	j = 0;
-	if (!remain)
-		return (0);
-	while (remain[i] != '\0' && remain[i] != '\n')
-		i++;
-	if (!remain[i])
-	{
-		free(remain);
-		return (0);
-	}
-	if (!(str = malloc(sizeof(char) * ((ft_strlen(remain) - i) + 1))))
-		return (0);
-	i++;
-	while (remain[i] != '\0')
-		str[j++] = remain[i++];
-	str[j] = '\0';
-	free(remain);
-	return (str);
+	t1 = 0;
+	t2 = 0;
+	if (s2 == NULL)
+		return ((char *)s1);
+	if (s1)
+		while (s1[t1] != '\0')
+			t1++;
+	while (s2[t2] != '\0')
+		t2++;
+	if (!(p = (char *)malloc(sizeof(*s1) * (t1 + t2 + 1))))
+		return (NULL);
+	t3 = t1;
+	p[t1 + t2] = '\0';
+	while (t1--)
+		p[t1] = s1[t1];
+	while (t2--)
+		p[t3 + t2] = s2[t2];
+	free((char *)s1);
+	return (p);
 }
 
-char	*get_line(char *str)
+static int		ft_strchrgnl(const char *s, int c)
+{
+	char *str;
+
+	if (s == NULL)
+		return (0);
+	str = (char *)s;
+	while (c != *str && *str != '\0')
+		str++;
+	if (*str != c)
+		return (0);
+	return (1);
+}
+
+static int		outbf(char **line, char *str)
 {
 	int		i;
-	char	*buf;
+	char	*bf;
 
 	i = 0;
 	if (!str)
 		return (0);
-	while (str[i] != '\0' && str[i] != '\n')
+	while (str[i] && str[i] != '\n')
 		i++;
-	if (!(buf = malloc(sizeof(char) * (i + 1))))
+	if (!(bf = malloc(sizeof(char) * (i + 1))))
 		return (0);
-	buf[i] = '\0';
-	i = 0;
-	while (str[i] != '\0' && str[i] != '\n')
+	bf[i] = '\0';
+	while (i--)
+		bf[i] = str[i];
+	*line = bf;
+	return (1);
+}
+
+static int		rd_file(int ri, int fd, char *buff, char **sbf)
+{
+	if ((ri = read(fd, buff, BUFFER_SIZE)) == -1)
 	{
-		buf[i] = str[i];
-		i++;
+		free(buff);
+		return (-1);
 	}
-	return (buf);
+	buff[ri] = '\0';
+	*sbf = ft_strjoingnl(*sbf, buff);
+	return (ri);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	static char *remain;
-	char		*buffer;
-	int			bytes;
+	char			*buff;
+	static char		*sbf[200];
+	int				ri;
 
+	ri = 1;
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
-	bytes = 1;
-	if (!remain)
-		remain = ft_strnew(1);
-	while (bytes != 0 && !ft_strchr(remain, '\n'))
-	{
-		if ((bytes = read(fd, buffer, BUFFER_SIZE)) == -1)
-		{
-			free(buffer);
+	while (!ft_strchrgnl(sbf[fd], '\n') && ri != 0)
+		if ((ri = rd_file(ri, fd, buff, &sbf[fd])) == -1)
 			return (-1);
-		}
-		buffer[bytes] = '\0';
-		remain = ft_strjoin(remain, buffer);
-	}
-	free(buffer);
-	*line = get_line(remain);
-	remain = get_remain(remain);
-	return ((bytes == 0) ? 0 : 1);
+	free(buff);
+	if (!outbf(line, sbf[fd]))
+		return (-1);
+	sbf[fd] = rmdr(sbf[fd], 0, 0);
+	if (ri == 0)
+		return (0);
+	return (1);
 }

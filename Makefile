@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+         #
+#    By: ehande <ehande@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/04/26 11:57:09 by hveiled          ###   ########.fr        #
+#    Updated: 2021/04/28 11:10:08 by ehande           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = \
 		utils/set_termcap.c \
 		utils/shell_prompt.c \
                 utils/shell_prompt_utils.c \
-		utils/gnl/get_next_line_utils.c \
+		utils/gnl/gnl_util.c \
 		utils/gnl/get_next_line.c \
                 utils/history.c\
 		utils/get_binary.c \
