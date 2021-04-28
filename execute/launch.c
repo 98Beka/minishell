@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 23:03:31 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:12:14 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,19 @@ int	set_fd(t_msh *msh)
 	msh->fd = 1;
 	if ((!msh->cmd->file && msh->cmd->r_redir != 0)
 		|| (!msh->cmd->file && msh->cmd->dbl_r_redir != 0))
-		return (ft_error(msh, "syntax error unexpected token `newline'", NULL));
+		return (ft_error(msh, "syntax error unexpected token `newline'",
+				NULL, 1));
 	else if (msh->cmd->r_redir == 1)
 	{
 		msh->fd = open(msh->cmd->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (msh->fd < 0)
-			ft_error(msh, NULL, NULL);
+			ft_error(msh, NULL, NULL, 1);
 	}
 	else if (msh->cmd->dbl_r_redir == 1)
 	{
 		msh->fd = open(msh->cmd->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (msh->fd < 0)
-			ft_error(msh, NULL, NULL);
+			ft_error(msh, NULL, NULL, 1);
 	}
 	return (1);
 }
@@ -72,7 +73,6 @@ static int	prepare_data(t_msh *msh, pid_t **pid)
 
 	msh->cmd_count = num_of_cmds(&msh->cmd);
 	msh->pipe_count = num_of_pipes(&msh->cmd);
-	msh->pipe_count = msh->cmd_count - 1;
 	msh->pfd = (int **)malloc(sizeof(int *) * (msh->cmd_count - 1));
 	if (!msh->pfd)
 		return (0);
@@ -86,7 +86,7 @@ static int	prepare_data(t_msh *msh, pid_t **pid)
 	while (++i < msh->pipe_count)
 	{
 		if (pipe(msh->pfd[i]) == -1)
-			ft_error(msh, NULL, NULL);
+			ft_error(msh, NULL, NULL, 1);
 	}
 	return (1);
 }

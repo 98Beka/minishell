@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:26:57 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/25 13:35:43 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:12:42 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	check_cmd(t_msh *msh, char *arg)
 		if (fstat(fd, &sb) < 0)
 		{
 			close(fd);
-			return (ft_error(msh, NULL, NULL));
+			return (ft_error(msh, NULL, NULL, 1));
 		}
 		if (sb.st_mode & S_IFDIR)
-			return (ft_error(msh, "is a directory", NULL));
+			return (ft_error(msh, "is a directory", NULL, 1));
 		close(fd);
 		return (1);
 	}

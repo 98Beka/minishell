@@ -61,3 +61,11 @@ exit
 ls
 ls
 ls
+ls
+ls | cat -e
+ls
+ls
+cd
+ls | cat -e
+ls | cat -e
+ls | cat -e

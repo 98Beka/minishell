@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 22:48:30 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:06:35 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	sigquit(int sn);
 void	sigcat(int sn);
 //void	set_pfd(t_msh *msh, int i, int cmd);
 
-int		ft_error(t_msh *msh, char *msg, t_cmd *cmd);
+int		ft_error(t_msh *msh, char *msg, t_cmd *cmd_name, int exit_code);
 int		set_termcap(t_msh *msh);
 int		shell_prompt(t_msh *msh, int len, int l, ssize_t stp);
 //int		exec_bin(t_msh *msh);

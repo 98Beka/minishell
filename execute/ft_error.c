@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:04:29 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/24 15:44:58 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 18:08:58 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ void	error_prompt(t_msh *msh, char *err_msg, t_cmd *cmd)
 	ft_putendl_fd(err_msg, msh->fd);
 }
 
-int	ft_error(t_msh *msh, char *msg, t_cmd *cmd)
+int	ft_error(t_msh *msh, char *msg, t_cmd *cmd_name, int exit_code)
 {
 	if (msg)
-		error_prompt(msh, msg, cmd);
+		error_prompt(msh, msg, cmd_name);
 	else
-		error_prompt(msh, strerror(errno), cmd);
+		error_prompt(msh, strerror(errno), cmd_name);
+	msh->code = exit_code;
 	return (0);
 }
