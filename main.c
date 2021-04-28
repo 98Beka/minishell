@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/28 11:43:11 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/28 12:03:22 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "utils/libft/libft.h"
 #include <sys/signal.h>
 
-int		execute(t_msh *msh)
+int	execute(t_msh *msh)
 {
 	if (!msh->cmd->arg[0])
 		ft_putstr_fd("", 1);
@@ -34,10 +34,10 @@ int		execute(t_msh *msh)
 		return (exec_echo(msh));
 	else
 		return (launch(msh));
- 	return (1);
+	return (1);
 }
 
-int		loop(t_msh *msh)
+int	loop(t_msh *msh)
 {
 	msh->line = NULL;
 	ft_putstr_fd("minishell > ", 1);
@@ -50,33 +50,31 @@ int		loop(t_msh *msh)
 	pars_line(msh, &msh->line);
 	if (!set_fd(msh))
 		return (1);
-	while(*msh->cmd->arg)
+	while (*msh->cmd->arg)
 	{
-		if(!execute(msh))
-			return(0);
-		if(msh->line)
-			pars_line(msh ,&msh->line);
+		if (!execute(msh))
+			return (0);
+		if (msh->line)
+			pars_line(msh, &msh->line);
 	}
 	free(msh->line);
 	return (1);
 }
 
-int		main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
-	(void)ac;
 	t_msh	msh;
-	
+
+	(void)ac;
 	msh.env = NULL;
 	init_history(&msh);
-
 	get_envp(envp, &msh);
 	set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
-	msh.shell_name = ft_strdup(av[0] + 2);	
+	msh.shell_name = ft_strdup(av[0] + 2);
 	set_termcap(&msh);
 	signal(SIGINT, sigint);
 	signal(SIGQUIT, sigquit);
 	while (loop(&msh))
-	 	NULL;
-	
+		NULL;
 	return (0);
 }

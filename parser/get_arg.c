@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/26 16:11:55 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 12:30:19 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,29 @@ static char	get_flags(char ch, char **line)
 	return (ch);
 }
 
-static void dollar(t_msh *msh, char **line)
+static void	dollar(t_msh *msh, char **line)
 {
-    int     i;
-    char    *d;
-    char    *tmp;
-    d = ft_strdup("");
-    del_at_index(line, 0);
-    while (line && **line && **line != ' '
-        && **line != '\"' && **line != '$')
-        mkline_dlch(&d, line);
-    tmp = get_env_val(d, msh->env);
-    if(!*d)
-        tmp = ft_strdup("$");
-    i = -1;
-    if (!tmp)
-        return ;
-    while (tmp[++i])
-        add_char_index(line, tmp[i], i);
-    free(tmp);
-    free(d);
+	int		i;
+	char	*d;
+	char	*tmp;
+
+	d = ft_strdup("");
+	del_at_index(line, 0);
+	while (line && **line && **line != ' ' && **line != '\"' && **line != '$')
+		mkline_dlch(&d, line);
+	if (*d == '?')
+		tmp = ft_itoa(msh->code);
+	else
+		tmp = get_env_val(d, msh->env);
+	if (!*d)
+		tmp = ft_strdup("$");
+	i = -1;
+	if (!tmp)
+		return ;
+	while (tmp[++i])
+		add_char_index(line, tmp[i], i);
+	free(tmp);
+	free(d);
 }
 
 static char	set_flags(char ch, t_msh *msh, char **line)
@@ -63,10 +66,10 @@ static char	set_flags(char ch, t_msh *msh, char **line)
 	return (ch);
 }
 
-char            *get_arg(t_msh *msh, char **line)
+char	*get_arg(t_msh *msh, char **line)
 {
 	char	*out;
-	
+
 	out = NULL;
 	msh->pf = F_NONE;
 	skip_sp(line);
@@ -79,12 +82,12 @@ char            *get_arg(t_msh *msh, char **line)
 			msh->pf = msh->pf & ~SHL;
 		}
 		if (msh->pf & SNGL)
-            while(**line && **line != '\'' && !is_end(msh->pf, **line))
-                mkline_dlch(&out, line);
-        if (**line == '$')
-            dollar(msh, line);
-        if (**line && !(msh->pf & SNGL) && **line != '\"')
-            mkline_dlch(&out, line);
+			while (**line && **line != '\'' && !is_end(msh->pf, **line))
+				mkline_dlch(&out, line);
+		if (**line == '$')
+			dollar(msh, line);
+		if (**line && !(msh->pf & SNGL) && **line != '\"')
+			mkline_dlch(&out, line);
 	}
 	return (out);
 }

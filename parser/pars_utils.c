@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:30:52 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/26 15:32:25 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/28 12:17:56 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	skip_sp(char **line)
 		del_to_index(line, i);
 }
 
-void new_cmd(t_cmd **cmd)
+void	new_cmd(t_cmd **cmd)
 {
 	*cmd = malloc(sizeof(t_cmd));
 	(*cmd)->next = NULL;
@@ -59,8 +59,6 @@ void new_cmd(t_cmd **cmd)
 	(*cmd)->pipe = 0;
 	(*cmd)->file = 0;
 	(*cmd)->arg = new_2d(0);
-	// add_l_line(&(*cmd)->arg, get_arg(msh, line));
-	// add_l_line(&(*cmd)->arg, get_arg(msh, line));
 }
 
 void	mkline_dlch(char **out, char **line)
