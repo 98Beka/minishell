@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 19:47:11 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 22:19:25 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ int	loop(t_msh *msh)
 		msh->line = ft_strdup("");
 	else
 		set_history(msh);
-		
-	//******//		
-		//msh->line = ft_strdup("export");
-	//******//	
-		
 	pars_line(msh, &msh->line);
 	if (!set_fd(msh))
 		return (1);
@@ -65,12 +60,13 @@ int	loop(t_msh *msh)
 	return (1);
 }
 
+
 int	main(int ac, char **av, char **envp)
 {
 	t_msh	msh;
 
 	(void)ac;
-	msh.env = NULL;
+	ft_bzero(&msh, sizeof(t_msh));
 	init_history(&msh);
 	get_envp(envp, &msh);
 	set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
@@ -80,6 +76,5 @@ int	main(int ac, char **av, char **envp)
 	signal(SIGQUIT, sigquit);
 	while (loop(&msh))
 		NULL;
-	//loop(&msh);
 	return (0);
 }
