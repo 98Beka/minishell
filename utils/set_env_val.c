@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_val.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:20:44 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/18 21:04:45 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/29 23:58:01 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		reset_variable(char **env, char *key, char *value)
+int	reset_variable(char **env, char *key, char *value)
 {
 	char	*variable;
 	char	*temp;
-	
+
 	variable = *env;
 	if (value)
 	{
@@ -31,19 +31,21 @@ int		reset_variable(char **env, char *key, char *value)
 	return (1);
 }
 
-int		check_key(char *key)
+int	check_key(char *key)
 {
 	int	i;
 
 	i = 0;
-	if (key[i] == ' ' || ft_isalpha(key[i]))
+	if ((key[i] == ' ') || (ft_isalpha(key[i])))
 	{
 		while (key[++i])
+		{
 			if (key[i] != ' ' && !ft_isalpha(key[i]) && !ft_isdigit(key[i]))
 			{
 				printf("minishell: export: `%s': not a valid identifier\n", key);
 				return (0);
 			}
+		}
 	}
 	else
 	{
@@ -53,25 +55,27 @@ int		check_key(char *key)
 	return (1);
 }
 
-int		find_key(char ***env, char *key, int *i)
+int	find_key(char ***env, char *key, int *i)
 {
 	int	j;
 
 	j = *i;
 	while ((*env)[++j])
 	{
-		if ((ft_strnstr((*env)[j], key, ft_strlen(key)) && (*env)[j][ft_strlen(key)] == '=')
-			|| (ft_strnstr((*env)[j], key, ft_strlen(key)) && (*env)[j][ft_strlen(key)] == '\0'))
-			{
-				*i = j;
-				return (1);
-			}
+		if ((ft_strnstr((*env)[j], key, ft_strlen(key))
+			&& (*env)[j][ft_strlen(key)] == '=')
+			|| (ft_strnstr((*env)[j], key, ft_strlen(key))
+			&& (*env)[j][ft_strlen(key)] == '\0'))
+		{
+			*i = j;
+			return (1);
+		}
 	}
 	*i = j;
 	return (0);
 }
 
-int		set_env_val(char ***env, char *key, char *value)
+int	set_env_val(char ***env, char *key, char *value)
 {
 	char	**new_env;
 	char	*tmp;
@@ -81,7 +85,7 @@ int		set_env_val(char ***env, char *key, char *value)
 	if (!check_key(key))
 		return (1);
 	if (find_key(env, key, &i))
-			return (reset_variable(&(*env)[i], key, value));
+		return (reset_variable(&(*env)[i], key, value));
 	if (value)
 		tmp = ft_strjoin(key, "=");
 	else

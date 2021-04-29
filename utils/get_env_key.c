@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:56:37 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/09 19:14:03 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 23:52:14 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_env_key(char **env, char *key)
 	char	*env_key;
 	char	*tmp;
 	int		i;
-	
+
 	i = -1;
 	env_key = ft_strjoin(key, "=");
 	while (*env)

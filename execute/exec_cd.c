@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:23:20 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/28 18:07:42 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/30 00:12:48 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	exec_cd_previous_dir(t_msh *msh)
 		if (!change_dir(msh, value, tmp))
 			return (0);
 	}
-	free_2d(&(msh->cmd->arg));
 	free(value);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:26:57 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 14:59:14 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 23:52:05 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,9 @@ char	*get_binary(t_msh *msh, t_cmd *cmd)
 {
 	char	**split;
 	char	*bin;
-	char	*tmp;
 	int		i;
 	char	*path;
-	
+
 	i = -1;
 	if (check_cmd(msh, cmd->arg[0]))
 		return (cmd->arg[0]);
@@ -64,14 +63,13 @@ char	*get_binary(t_msh *msh, t_cmd *cmd)
 	split = ft_split(path, ':');
 	while (split[++i])
 	{
-		tmp = get_full_path(split[i], cmd->arg[0]);
-		bin = tmp;
+		bin = get_full_path(split[i], cmd->arg[0]);
 		if (check_cmd(msh, bin))
 		{
 			free_2d(&split);
-			return (ft_strdup(bin));
+			free(path);
+			return (bin);
 		}
-		free(tmp);
 	}
 	free(path);
 	free_2d(&split);

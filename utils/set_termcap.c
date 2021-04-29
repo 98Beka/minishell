@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 14:51:37 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/26 17:51:21 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 23:54:10 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	set_termcap(t_msh *msh)
 	msh->line = NULL;
 	term_name = "xterm-256color";
 	tcgetattr(0, &msh->term);
-	//msh->term.c_lflag &= ~(ISIG);
 	msh->term.c_lflag &= ~(ECHO);
 	msh->term.c_lflag &= ~(ICANON);
 	tcsetattr(0, TCSANOW, &msh->term);

@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:23:47 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/23 16:15:00 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 23:52:53 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 char	*is_value(char *var, char *key)
 {
 	int		len;
-	
+
 	len = ft_strlen(key);
 	if (((ft_strnstr(var, key, len)) && (var[len] == '='))
 		|| ((ft_strnstr(var, key, len)) && (var[len]) == '\0'))
-			return (var);
+		return (var);
 	return (NULL);
 }
 
