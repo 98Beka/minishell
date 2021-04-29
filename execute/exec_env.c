@@ -6,13 +6,13 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:36:35 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/20 17:04:12 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 11:56:28 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	exec_env(t_msh *msh)
+int	exec_env(t_msh *msh)
 {
 	int		i;
 
@@ -23,4 +23,5 @@ void	exec_env(t_msh *msh)
 			ft_putendl_fd(msh->env[i], msh->fd);
 		i++;
 	}
+	return (1);
 }

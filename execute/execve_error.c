@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 20:40:16 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/28 18:11:43 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:57:51 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	execve_error(t_msh *msh, char *path)
 			closedir(msh->dir);
 		}
 	}
+	else
+		ft_error(msh, "command not found", NULL, 127);
 	free(path);
-	return (0);
+	return (1);
 }

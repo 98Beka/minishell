@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ehande <ehande@student.42.fr>              +#+  +:+       +#+         #
+#    By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/04/28 11:10:08 by ehande           ###   ########.fr        #
+#    Updated: 2021/04/29 15:37:06 by hveiled          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRCS = \
 		parser/pars_line.c \
                 parser/get_arg.c \
                 parser/pars_utils.c \
+		execute/set_fd.c \
+		execute/set_pfd.c \
 		execute/exec_env.c \
 		execute/exec_pwd.c \
 		execute/exec_exit.c \
@@ -40,11 +42,11 @@ SRCS = \
 		execute/exec_export.c \
 		execute/exec_unset.c \
 		execute/exec_echo.c \
-		execute/exec_child.c \
 		execute/exec_redirect.c \
 		execute/exec_piped_cmd.c \
 		execute/exec_single_cmd.c \
 		execute/exec_signal.c \
+		execute/exec_bin.c \
 		execute/launch.c \
 		execute/ft_error.c \
 		execute/execve_error.c

@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 11:24:36 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/28 18:09:13 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:42:45 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ int	exec_exit(t_msh *msh)
 	if (msh->cmd->arg[1])
 	{
 		if (!is_numeric_arg(msh->cmd->arg[1]))
-		{
-			msh->code = 128;
-			ft_error(msh, "numeric argument required", NULL, 1);
-		}
+			ft_error(msh, "numeric argument required", NULL, 128);
 		else
 			ret = ft_atoi(msh->cmd->arg[1]);
 	}

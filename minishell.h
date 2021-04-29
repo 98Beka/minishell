@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/28 18:06:35 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 16:01:20 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_msh
 	int				cmd_count;
 	int				pipe_count;
 	char			*path;
-	DIR 			*dir;
+	DIR				*dir;
 	int				code;
 	struct termios	term;
 }t_msh;
@@ -80,7 +80,7 @@ char	*get_env_val(char *key, char **env);
 int		set_env_val(char ***env, char *key, char *value);
 int		del_env_val(char ***env, char *key);
 void	clear(char **array);
-void	exec_env(t_msh *msh);
+int		exec_env(t_msh *msh);
 int		exec_pwd(t_msh *msh);
 int		exec_exit(t_msh *msh);
 int		exec_cd(t_msh *msh);
@@ -89,21 +89,19 @@ int		exec_unset(t_msh *msh);
 int		exec_echo(t_msh *msh);
 int		exec_redirect(t_msh *msh, t_cmd *cmnd);
 int		exec_piped_cmd(t_msh *msh, t_cmd *cmnd, char *path, pid_t *pid);
-int		exec_single_cmd(t_msh *msh, char *path);
+int		exec_single_cmd(t_msh *msh);
+int		exec_bin(t_msh *msh);
+int		execute(t_msh *msh);
 int		execve_error(t_msh *msh, char *path);
 int		set_fd(t_msh *msh);
+void	set_pfd(t_msh *msh, int i, int cmd);
 void	sigint(int sn);
 void	sigquit(int sn);
 void	sigcat(int sn);
-//void	set_pfd(t_msh *msh, int i, int cmd);
-
 int		ft_error(t_msh *msh, char *msg, t_cmd *cmd_name, int exit_code);
 int		set_termcap(t_msh *msh);
 int		shell_prompt(t_msh *msh, int len, int l, ssize_t stp);
-//int		exec_bin(t_msh *msh);
-//char	*get_binary(t_msh *msh);
 char	*get_binary(t_msh *msh, t_cmd *cmd);
-//int		exec_pipe(t_msh *msh);
 int		launch(t_msh *msh);
 int		exec_child(t_msh *msh, char *bin_path);
 int		exec_parent(t_msh *msh, char *bin_path);
@@ -111,7 +109,7 @@ void	skip_sp(char **line);
 void	skip_sp_ch(char **line, char ch);
 void	new_cmd(t_cmd **cmd);
 t_cmd	*last_cmd(t_cmd *cmd);
-char    *get_arg(t_msh *msh, char **line);
+char	*get_arg(t_msh *msh, char **line);
 void	mkline_dlch(char **out, char **line);
 void	change_cmd_line(t_msh *msh);
 void	del_cap(t_msh *msh, int len);
@@ -119,4 +117,4 @@ void	clean_console(t_msh *msh, int *len);
 void	set_history(t_msh *msh);
 void	init_history(t_msh *msh);
 
-#endif // !MINISHELL_H
+#endif

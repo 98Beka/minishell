@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:26:57 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/28 18:12:42 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:59:14 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ char	*get_binary(t_msh *msh, t_cmd *cmd)
 	}
 	free(path);
 	free_2d(&split);
-	return (NULL);
+	return (cmd->arg[0]);
 }

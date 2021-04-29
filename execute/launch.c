@@ -6,34 +6,33 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/28 18:12:14 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:59:06 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	set_fd(t_msh *msh)
-{
-
-	msh->fd = 1;
-	if ((!msh->cmd->file && msh->cmd->r_redir != 0)
-		|| (!msh->cmd->file && msh->cmd->dbl_r_redir != 0))
-		return (ft_error(msh, "syntax error unexpected token `newline'",
-				NULL, 1));
-	else if (msh->cmd->r_redir == 1)
-	{
-		msh->fd = open(msh->cmd->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		if (msh->fd < 0)
-			ft_error(msh, NULL, NULL, 1);
-	}
-	else if (msh->cmd->dbl_r_redir == 1)
-	{
-		msh->fd = open(msh->cmd->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
-		if (msh->fd < 0)
-			ft_error(msh, NULL, NULL, 1);
-	}
-	return (1);
-}
+//int	set_fd(t_msh *msh)
+//{
+// 	msh->fd = 1;
+//	if ((!msh->cmd->file && msh->cmd->r_redir != 0)
+//		|| (!msh->cmd->file && msh->cmd->dbl_r_redir != 0))
+//		return (ft_error(msh, "syntax error unexpected token `newline'",
+//				NULL, 1));
+//	else if (msh->cmd->r_redir == 1)
+//	{
+//		msh->fd = open(msh->cmd->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+//		if (msh->fd < 0)
+//			ft_error(msh, NULL, NULL, 1);
+//	}
+//	else if (msh->cmd->dbl_r_redir == 1)
+//	{
+//		msh->fd = open(msh->cmd->file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+//		if (msh->fd < 0)
+//			ft_error(msh, NULL, NULL, 1);
+//	}
+//	return (1);
+//}
 
 static int	num_of_cmds(t_cmd **cmd)
 {
@@ -73,6 +72,7 @@ static int	prepare_data(t_msh *msh, pid_t **pid)
 
 	msh->cmd_count = num_of_cmds(&msh->cmd);
 	msh->pipe_count = num_of_pipes(&msh->cmd);
+	msh->pipe_count = msh->cmd_count - 1;
 	msh->pfd = (int **)malloc(sizeof(int *) * (msh->cmd_count - 1));
 	if (!msh->pfd)
 		return (0);
@@ -106,7 +106,7 @@ int	launch(t_msh *msh)
 			return (1);
 	}
 	else
-		exec_single_cmd(msh, msh->path);
+		exec_single_cmd(msh);
 	free (msh->path);
 	return (1);
 }
