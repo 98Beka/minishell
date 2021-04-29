@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/30 02:02:21 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/30 02:24:12 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	free_msh(t_msh *msh, pid_t *pid)
 	{
 		free_2d(&msh->cmd->arg);
 		p = msh->cmd;
-		if(msh->cmd->file)
+		if (msh->cmd->file)
 			free(msh->cmd->file);
 		msh->cmd = msh->cmd->next;
 		free(p);
@@ -104,7 +104,7 @@ int	launch(t_msh *msh)
 	if (!prepare_data(msh, &pid))
 		return (1);
 	if (!ft_strcmp(msh->cmd->arg[0], "cat"))
-		process_flag = 1;
+		g_process_flag = 1;
 	i = -1;
 	if (msh->pipe_count != 0)
 	{

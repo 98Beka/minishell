@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/30 02:01:18 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/30 02:25:08 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_msh
 	struct termios	term;
 }t_msh;
 
-int		process_flag;
+int		g_process_flag;
 int		pars_line(t_msh *msh, char **line);
 int		get_envp(char **envp, t_msh *msh);
 void	sort_envp(char ***env);

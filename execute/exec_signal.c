@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_signal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:20:43 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/30 02:05:26 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/30 02:17:56 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,7 @@ void	sigint(int sig)
 void	sigquit(int sig)
 {
 	(void)sig;
-	if (process_flag)
+	if (g_process_flag)
 		write(1, "Quit: 3\n", 8);
-	process_flag = 0;
+	g_process_flag = 0;
 }
-
-//void	sigcat(int sig)
-//{
-//	(void)sig;
-//	write(1, "\b\b\b\b", 6);
-//	return ;
-//}

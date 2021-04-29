@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/30 02:03:38 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/30 02:17:12 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int ac, char **av, char **envp)
 	t_msh	msh;
 
 	(void)ac;
-	process_flag = 0;
+	g_process_flag = 0;
 	ft_bzero(&msh, sizeof(t_msh));
 	init_history(&msh);
 	get_envp(envp, &msh);

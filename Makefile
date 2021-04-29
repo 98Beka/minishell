@@ -6,7 +6,7 @@
 #    By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/04/29 15:37:06 by hveiled          ###   ########.fr        #
+#    Updated: 2021/04/30 02:24:00 by hveiled          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,14 @@ SRCS = \
 		utils/del_env_val.c \
 		utils/set_termcap.c \
 		utils/shell_prompt.c \
-                utils/shell_prompt_utils.c \
+        utils/shell_prompt_utils.c \
 		utils/gnl/gnl_util.c \
 		utils/gnl/get_next_line.c \
-                utils/history.c\
+		utils/history.c\
 		utils/get_binary.c \
 		parser/pars_line.c \
-                parser/get_arg.c \
-                parser/pars_utils.c \
+		parser/get_arg.c \
+		parser/pars_utils.c \
 		execute/set_fd.c \
 		execute/set_pfd.c \
 		execute/exec_env.c \
@@ -95,7 +95,7 @@ LIB_SRCS = \
         utils/libft/ft_tolower.c \
         utils/libft/ft_toupper.c \
 
-OBJS		= $(SRCS:.c=.o)
+OBJS	= $(SRCS:.c=.o)
 
 CC		= gcc
 RM		= rm -f
@@ -103,19 +103,13 @@ CFLAGS		= -Wall -Wextra -Werror
 TERM		= -ltermcap
 
 			
-# all:		$(NAME)
+all:		$(NAME)
 
 
-# $(NAME):	$(OBJS)
-# 			$(MAKE) bonus -C utils/libft/
-# 			$(MAKE) -C utils/ft_arr/
-# 			$(CC) $(CFLAGS) -o $(NAME) $(LIBFT) $(2DARR) $(OBJS) $(TERM)
-
-all:		        $(NAME) clean
-
-
-$(NAME):	        $(OBJS)
-			@$(CC) -g $(SRCS) $(LIB_SRCS) $(LIB_ARR) $(TERM)
+$(NAME):	$(OBJS)
+			$(MAKE) bonus -C utils/libft/
+			$(MAKE) -C utils/ft_arr/
+			$(CC) $(CFLAGS) -o $(NAME) $(LIBFT) $(2DARR) $(OBJS) $(TERM)
 
 clean:
 			@$(MAKE) clean -C utils/libft/
