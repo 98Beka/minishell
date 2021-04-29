@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 23:20:55 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/30 01:25:12 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	prepare_data(t_msh *msh, pid_t **pid)
 	return (1);
 }
 
-static void	free_msh(t_msh *msh, pid_t *pid)
+void	free_msh(t_msh *msh, pid_t *pid)
 {
 	t_cmd	*p;
 	int		i;
@@ -87,6 +87,8 @@ static void	free_msh(t_msh *msh, pid_t *pid)
 	{
 		free_2d(&msh->cmd->arg);
 		p = msh->cmd;
+		if(msh->cmd->file)
+			free(msh->cmd->file);
 		msh->cmd = msh->cmd->next;
 		free(p);
 	}

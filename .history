@@ -183,3 +183,23 @@ ls | cat -e | grep ma
 ls
 ls
 x
+ls
+ls
+ls
+ls
+ls
+ls | cat -e | grep ma
+ls
+ls | cat -e | grep ma > 1
+ls | cat -e | grep ma > 1
+ls | cat -e | grep ma > 2
+ls | cat -e | grep ma > 1
+ls | cat -e | grep ma > 2
+ls | cat -e | grep ma > 1
+ls | cat -e | grep ma > 2
+ls | cat -e | grep ma > 3
+ls | cat -e | grep ma > 2
+ls | cat -e | grep ma > 3
+ls | cat -e | grep ma > 2
+ls | cat -e | grep ma > 3
+cat

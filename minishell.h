@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 19:57:14 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/30 01:11:16 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,5 @@ void	del_cap(t_msh *msh, int len);
 void	clean_console(t_msh *msh, int *len);
 void	set_history(t_msh *msh);
 void	init_history(t_msh *msh);
-
+void	free_msh(t_msh *msh, pid_t *pid);
 #endif
