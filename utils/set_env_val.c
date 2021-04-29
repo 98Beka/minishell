@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:20:44 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 23:58:01 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/30 00:39:09 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@ int	find_key(char ***env, char *key, int *i)
 	return (0);
 }
 
+static void	set_key(char **tmp, char *key, char *value)
+{
+	if (value)
+		*tmp = ft_strjoin(key, "=");
+	else
+		*tmp = ft_strdup(key);
+}
+
 int	set_env_val(char ***env, char *key, char *value)
 {
 	char	**new_env;
@@ -86,10 +94,7 @@ int	set_env_val(char ***env, char *key, char *value)
 		return (1);
 	if (find_key(env, key, &i))
 		return (reset_variable(&(*env)[i], key, value));
-	if (value)
-		tmp = ft_strjoin(key, "=");
-	else
-		tmp = ft_strdup(key);
+	set_key(&tmp, key, value);
 	i += 2;
 	new_env = (char **)ft_calloc(sizeof(char *), (i--));
 	if (!new_env)

@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 23:47:13 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/30 00:32:23 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	loop(t_msh *msh)
 		if (msh->line)
 			pars_line(msh, &msh->line);
 	}
+	free(msh->cmd->arg);
 	free(msh->line);
 	return (1);
 }

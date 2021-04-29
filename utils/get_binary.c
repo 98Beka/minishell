@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:26:57 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 23:52:05 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/30 00:50:04 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*get_full_path(char *path, char *cmd)
 	char	*tmp;
 	char	*bin_cmd;
 
+	tmp = NULL;
 	tmp = ft_strjoin(path, "/");
 	bin_cmd = ft_strjoin(tmp, cmd);
 	free(tmp);
