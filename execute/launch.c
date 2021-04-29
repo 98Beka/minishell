@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/30 01:25:12 by ehande           ###   ########.fr       */
+/*   Updated: 2021/04/30 02:02:21 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int	launch(t_msh *msh)
 	pid = NULL;
 	if (!prepare_data(msh, &pid))
 		return (1);
+	if (!ft_strcmp(msh->cmd->arg[0], "cat"))
+		process_flag = 1;
 	i = -1;
 	if (msh->pipe_count != 0)
 	{
