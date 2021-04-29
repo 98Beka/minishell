@@ -427,3 +427,72 @@ pwd
 ls > 1
 cat < 1
 cat < 1 > 2
+cat
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+ls | cat -e | grep ma
+ls | cat -e | grep ma > 1
+ls
+env
+export
+env | cat -e
+ls
+env
+export
+ls
+ls
+ls
+ls | cta
+ls
+ls | cat -e
+ls
+export
+env
+cd
+ls
+ls
+ls
+ls
+ls
+ls
+ls | cat -e | grep ma
+ls
+ls
+ls
+ls
+ls -la
+ls | cat | grep ma
+ls -la | cat -e | grep ma
+ls | cat -e
+ls | cat -e | grep ma
+ls | cat -e | grep ma
+ls | cat -e | grep ma
+ls | cat -e | grep ma
+ls | cat -e | grep ma
+export
+env | cat -e
+ls
+ls
+ls
+ls

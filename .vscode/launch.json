@@ -11,7 +11,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/utils/ft_arr/a.out",
+            "program": "/Users/hveiled/Documents/Projects/minishell_next_4/minishell/a.out",
             "args": [],
             "cwd": "${workspaceFolder}"
         }

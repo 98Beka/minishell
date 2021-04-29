@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 11:32:35 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 15:56:40 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 18:49:07 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	exec_bin(t_msh *msh)
 			exec_redirect(msh, msh->cmd);
 		if (execve(path, msh->cmd->arg, msh->env) < 0)
 			exit(execve_error(msh, path));
+		free(path);
 	}
 	else
 		if (waitpid(pid, &msh->code, 0) < 0)

@@ -6,11 +6,12 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 16:07:13 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/04/29 19:47:11 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "utils/ft_arr/ft_arr.h"
 #include "utils/libft/libft.h"
 #include <sys/signal.h>
 
@@ -45,6 +46,11 @@ int	loop(t_msh *msh)
 		msh->line = ft_strdup("");
 	else
 		set_history(msh);
+		
+	//******//		
+		//msh->line = ft_strdup("export");
+	//******//	
+		
 	pars_line(msh, &msh->line);
 	if (!set_fd(msh))
 		return (1);
@@ -74,5 +80,6 @@ int	main(int ac, char **av, char **envp)
 	signal(SIGQUIT, sigquit);
 	while (loop(&msh))
 		NULL;
+	//loop(&msh);
 	return (0);
 }
