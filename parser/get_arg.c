@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/03 21:23:59 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/03 21:52:13 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,27 @@ static char	set_flags(char ch, t_msh *msh, char **line)
 	return (ch);
 }
 
+void get_shadow(char **out)
+{
+	char buf;
+	int i;
+	
+	i = 0;
+	buf = ' ';
+	while (1)
+	{
+		
+		read(0, &buf, 1);
+		if (buf == '\n' || buf == '\4')
+			break;
+		write(1, &buf, 1);
+		make_line(out, buf);
+		i++;
+	}
+	while (i--)
+		tputs(cursor_left, 1, ft_putchar);
+}
+
 char	*get_arg(t_msh *msh, char **line)
 {
 	char	*out;
@@ -78,7 +99,7 @@ char	*get_arg(t_msh *msh, char **line)
 		set_flags(**line, msh, line);
 		if(!*line[0] && msh->pf & SHL)
 		{
-			make_line(&out, '\\');
+			get_shadow(&out);
 			return(out);
 		}
 		if (msh->pf & SHL)
