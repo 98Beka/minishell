@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/28 12:30:19 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/03 21:23:59 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ char	*get_arg(t_msh *msh, char **line)
 	while (*line && **line && !is_end(msh->pf, **line))
 	{
 		set_flags(**line, msh, line);
+		if(!*line[0] && msh->pf & SHL)
+		{
+			make_line(&out, '\\');
+			return(out);
+		}
 		if (msh->pf & SHL)
 		{
 			mkline_dlch(&out, line);

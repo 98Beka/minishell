@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/30 02:13:21 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/03 21:12:10 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,10 @@ int	shell_prompt(t_msh *msh, int len, int l, ssize_t stp)
 			|| !ft_strncmp(msh->buff, "\177", 1))
 			right_left_del(msh, &stp, len, msh->buff);
 		else if (!ft_strncmp(msh->buff, "\4", 1))
-			return (0);
+			{
+				write(1, "exit\n", 5);
+				exit(0);
+			}
 		else
 			stp += write(1, msh->buff, l);
 		if (ft_isprint(*msh->buff))
