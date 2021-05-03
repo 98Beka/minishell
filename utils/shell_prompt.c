@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/03 23:48:34 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 02:45:23 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 void	up_down(t_msh *msh, char *bf, int *len, ssize_t *stp)
 {
 	char	*tmp;
-
+	
+	tmp = NULL;
 	clean_console(msh, len);
+	if (!*msh->history)
+		return ;
 	tputs(restore_cursor, 1, ft_putchar);
 	if (!ft_strncmp(bf, "\e[A", 3))
 	{
-		if (msh->h_index)
+		if (msh->h_index > 0)
 			msh->h_index -=1;
 		tmp = msh->history[msh->h_index];
 	}
