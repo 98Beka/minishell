@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/03 22:37:39 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/03 23:24:36 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,27 +66,6 @@ static char	set_flags(char ch, t_msh *msh, char **line)
 	return (ch);
 }
 
-void	get_shadow(char **out)
-{
-	char	buf;
-	int		i;
-
-	i = 0;
-	buf = ' ';
-	tputs(save_cursor, 1, ft_putchar);
-	write(1, "> ", 2);
-	while (1)
-	{
-		read(0, &buf, 1);
-		if (buf == '\n' || buf == '\4')
-			break ;
-		write(1, &buf, 1);
-		make_line(out, buf);
-		i++;
-	}
-	write(1, "\n", 1);
-}
-
 char	*get_arg(t_msh *msh, char **line)
 {
 	char	*out;
@@ -99,7 +78,8 @@ char	*get_arg(t_msh *msh, char **line)
 		set_flags(**line, msh, line);
 		if (!*line[0] && msh->pf & SHL)
 		{
-			get_shadow(&out);
+			write(1, "> ", 2);
+			shell_prompt(msh, 0, 0, 0);
 			return (out);
 		}
 		if (msh->pf & SHL)
