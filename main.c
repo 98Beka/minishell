@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 01:53:07 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/04 02:17:57 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ int	main(int ac, char **av, char **envp)
 	set_termcap(&msh);
 	signal(SIGINT, sigint);
 	signal(SIGQUIT, sigquit);
+	// msh.line = ft_strdup("echo hi");
+	// pars_line(&msh, &msh.line);
+	// launch(&msh);
 	while (loop(&msh))
 		NULL;
 	return (0);

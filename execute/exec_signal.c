@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_signal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:20:43 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/30 02:17:56 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 01:57:58 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	sigint(int sig)
 	(void)sig;
 	if (write(1, "\b  \n", 5) < 0)
 		return ;
-	write(1, "minishell > ", 13);
+	if (!g_process_flag)
+		write(1, "minishell > ", 13);
 	signal(SIGINT, sigint);
 }
 
