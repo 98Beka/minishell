@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/03 23:08:05 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 01:53:07 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	loop(t_msh *msh)
 		if (msh->line)
 			pars_line(msh, &msh->line);
 	}
-	// free(msh->cmd->arg);
-	// free(msh->cmd);
+	free(msh->cmd->arg);
+	free(msh->cmd);
 	free(msh->line);
 	return (1);
 }
