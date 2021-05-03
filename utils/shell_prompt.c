@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/03 23:07:53 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/03 23:48:34 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ int	shell_prompt(t_msh *msh, int len, int l, ssize_t stp)
 		else if (!ft_strncmp(msh->buff, "\4", 1))
 		{
 			write(1, "exit\n", 5);
+			msh->term.c_lflag |= ECHO;
+			msh->term.c_lflag |= ICANON;
+			tcsetattr(0, TCSANOW, &msh->term);
 			exit(0);
 		}
 		else

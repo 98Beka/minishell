@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/03 23:24:36 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 00:11:36 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,11 @@ char	*get_arg(t_msh *msh, char **line)
 		{
 			write(1, "> ", 2);
 			shell_prompt(msh, 0, 0, 0);
+			if((*line)[0] == '\n')
+			{
+				del_at_index(line, 0);
+				out = ft_strdup("");
+			}
 			return (out);
 		}
 		if (msh->pf & SHL)
