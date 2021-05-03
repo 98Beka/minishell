@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 10:07:52 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 19:04:25 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/03 22:10:38 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	printf_fd(int fd, char *flag, char *split0, char *split1)
 		ft_putstr_fd("declare -x ", fd);
 		ft_putstr_fd(split0, fd);
 		ft_putstr_fd("=", fd);
-		ft_putendl_fd(split1, fd);
+		ft_putstr_fd("\"", fd);
+		ft_putstr_fd(split1, fd);
+		ft_putendl_fd("\"", fd);
 	}
 	else
 	{

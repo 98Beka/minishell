@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/03 21:52:13 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/03 22:37:39 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,25 @@ static char	set_flags(char ch, t_msh *msh, char **line)
 	return (ch);
 }
 
-void get_shadow(char **out)
+void	get_shadow(char **out)
 {
-	char buf;
-	int i;
-	
+	char	buf;
+	int		i;
+
 	i = 0;
 	buf = ' ';
+	tputs(save_cursor, 1, ft_putchar);
+	write(1, "> ", 2);
 	while (1)
 	{
-		
 		read(0, &buf, 1);
 		if (buf == '\n' || buf == '\4')
-			break;
+			break ;
 		write(1, &buf, 1);
 		make_line(out, buf);
 		i++;
 	}
-	while (i--)
-		tputs(cursor_left, 1, ft_putchar);
+	write(1, "\n", 1);
 }
 
 char	*get_arg(t_msh *msh, char **line)
@@ -97,10 +97,10 @@ char	*get_arg(t_msh *msh, char **line)
 	while (*line && **line && !is_end(msh->pf, **line))
 	{
 		set_flags(**line, msh, line);
-		if(!*line[0] && msh->pf & SHL)
+		if (!*line[0] && msh->pf & SHL)
 		{
 			get_shadow(&out);
-			return(out);
+			return (out);
 		}
 		if (msh->pf & SHL)
 		{
