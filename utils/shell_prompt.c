@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 02:45:23 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/04 10:24:19 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	up_down(t_msh *msh, char *bf, int *len, ssize_t *stp)
 	tputs(restore_cursor, 1, ft_putchar);
 	if (!ft_strncmp(bf, "\e[A", 3))
 	{
-		if (msh->h_index > 0)
+		if (msh->h_index > 0 && msh->h_index != dbl_len(msh->history))
 			msh->h_index -=1;
 		tmp = msh->history[msh->h_index];
 	}

@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:39:49 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 22:10:00 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/04 09:41:27 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	pars_line(t_msh *msh, char **line)
 {
 	if (**line == ';')
 		del_to_index(line, 1);
-	new_cmd(&msh->cmd);
 	while (*line && **line && **line != ';')
 	{
 		skip_sp_ch(line, ' ');

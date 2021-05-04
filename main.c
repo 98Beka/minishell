@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 09:20:38 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 10:05:21 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	loop(t_msh *msh)
 		msh->line = ft_strdup("");
 	else
 		set_history(msh);
+	new_cmd(&msh->cmd);
 	pars_line(msh, &msh->line);
 	if (!set_fd(msh))
 		return (1);

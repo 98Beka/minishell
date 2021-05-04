@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:12:04 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/28 12:46:18 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 10:16:33 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_echo(t_msh *msh, char **cmd)
+void	print_echo(t_msh *msh, char **line)
 {
-	while (*cmd)
+	int i;
+	
+	i = 0;
+	while (line[++i])
 	{
-		write (msh->fd, *cmd, ft_strlen(*cmd));
-		cmd++;
-		if (*cmd)
+		if(i > 1)
 			write(msh->fd, " ", 1);
+		write (msh->fd, line[i], ft_strlen(line[i]));
 	}
 }
 
 int	exec_echo(t_msh *msh)
 {
-	msh->cmd->arg++;
 	if (!ft_strcmp(*msh->cmd->arg, "-n") && *msh->cmd->arg)
-		print_echo(msh, ++msh->cmd->arg);
+		print_echo(msh, msh->cmd->arg);
 	else
 	{
 		if (*msh->cmd->arg)

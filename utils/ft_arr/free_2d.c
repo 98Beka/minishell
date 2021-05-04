@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 13:39:05 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/04 02:18:14 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/04 10:11:54 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	free_2d(char ***input)
 	i = 0;
 	while ((*input)[i])
 		free((*input)[i++]);
-	**input = NULL;
+	free(*input);
+	*input = NULL;
 }
