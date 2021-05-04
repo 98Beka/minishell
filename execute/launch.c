@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 10:12:05 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/04 17:34:49 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,12 @@ void	free_msh(t_msh *msh, pid_t *pid)
 	while (msh->cmd)
 	{
 		p = msh->cmd;
-		
 		free_2d(&p->arg);
 		if (p->file)
 			free(p->file);
 		msh->cmd = msh->cmd->next;
 		free(p);
 	}
-	
 	new_cmd(&msh->cmd);
 }
 
@@ -115,7 +113,6 @@ int	launch(t_msh *msh)
 	}
 	else
 		exec_single_cmd(msh);
-
 	free_msh(msh, pid);
 	return (1);
 }

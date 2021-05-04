@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 10:07:52 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/03 22:10:38 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 16:07:58 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ int	exec_export(t_msh *msh)
 		{
 			var = ft_split(msh->cmd->arg[1], '=');
 			if (var[1] == NULL)
-				var[1] = ft_strdup("");
+				add_l_line(&var, ft_strdup(""));
 			set_env_val(&msh->env, var[0], var[1]);
+			free_2d(&var);
 		}
 		else
 			set_env_val(&msh->env, msh->cmd->arg[1], NULL);

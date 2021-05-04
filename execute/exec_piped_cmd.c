@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 17:53:50 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 19:57:09 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 12:28:22 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	child_do(t_msh *msh, t_cmd *cmnd, char *path, int i)
 	if (cmnd->r_redir || cmnd->l_redir || cmnd->dbl_r_redir)
 		exec_redirect(msh, cmnd);
 	if (execve(path, (cmnd)->arg, msh->env))
-		exit(execve_error(msh, path));
+		exit(execve_error(msh, path, cmnd));
 	free(path);
 	return (1);
 }

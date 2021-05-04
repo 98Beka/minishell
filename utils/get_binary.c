@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:26:57 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/30 00:50:04 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 12:32:01 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,20 @@ char	*get_full_path(char *path, char *cmd)
 
 int	check_cmd(t_msh *msh, char *arg)
 {
-	struct stat	sb;
+	(void)msh;
+	//struct stat	sb;
 	int			fd;
 
 	fd = open(arg, O_RDONLY);
 	if (fd >= 0)
 	{
-		if (fstat(fd, &sb) < 0)
-		{
-			close(fd);
-			return (ft_error(msh, NULL, NULL, 1));
-		}
-		if (sb.st_mode & S_IFDIR)
-			return (ft_error(msh, "is a directory", NULL, 1));
+		//if (fstat(fd, &sb) < 0)
+		//{
+		//	close(fd);
+		//	return (ft_error(msh, NULL, NULL, 1));
+		//}
+		//if (sb.st_mode & S_IFDIR)
+		//	return (ft_error(msh, "is ++++a directory", NULL, 1));
 		close(fd);
 		return (1);
 	}

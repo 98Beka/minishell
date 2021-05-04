@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 17:20:43 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 09:20:54 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 20:13:54 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 void	sigint(int sig)
 {
 	(void)sig;
-	if (write(1, "\b  \n", 5) < 0)
+	if (write(1, "\n", 1) < 0)
 		return ;
 	if (!g_process_flag)
-		write(1, "minishell > ", 13);
+		write(1, "minishell > ", 12);
+	tputs(save_cursor, 1, ft_putchar);
 	signal(SIGINT, sigint);
 }
 

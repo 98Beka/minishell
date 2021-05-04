@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/30 02:25:08 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 12:28:19 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		exec_piped_cmd(t_msh *msh, t_cmd *cmnd, pid_t *pid);
 int		exec_single_cmd(t_msh *msh);
 int		exec_bin(t_msh *msh);
 int		execute(t_msh *msh);
-int		execve_error(t_msh *msh, char *path);
+int		execve_error(t_msh *msh, char *path, t_cmd *cmnd);
 int		set_fd(t_msh *msh);
 void	set_pfd(t_msh *msh, int i, int cmd);
 void	sigint(int sn);

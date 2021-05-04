@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 21:42:35 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 15:58:38 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 17:51:32 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ static char	*in_env(t_msh *msh, char *key)
 
 int	exec_single_cmd(t_msh *msh)
 {
-	if (!in_env(msh, "PATH"))
-		return (ft_error(msh, "No such file or directory", NULL, 1));
 	if (!execute(msh))
+	{
+		if (!in_env(msh, "PATH"))
+			return (ft_error(msh, "No such file or directory", NULL, 1));
 		return (exec_bin(msh));
+}
 	return (1);
 }

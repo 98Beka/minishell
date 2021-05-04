@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:33:38 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 02:34:40 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/04 16:21:43 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ char	*ft_strdup(const char *src)
 {
 	char	*dup;
 	size_t	len;
-	
+
 	if (!src)
-	return (NULL);
+		return (NULL);
 	len = 0;
 	while (src[len] != '\0')
 		len++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 08:53:41 by hveiled           #+#    #+#             */
-/*   Updated: 2020/11/11 14:31:06 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/04 11:17:05 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char		**ft_split(char const *s, char c)
 	while (i < lines(s, c))
 	{
 		word(s, c, &start, &end);
-		if (!(str[i] = (char *)malloc(sizeof(char) * (end + 1))))
+		if (!(str[i] = (char *)ft_calloc(sizeof(char), (end + 1))))
 		{
 			clear(str, i);
 			return (NULL);

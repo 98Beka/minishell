@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:12:04 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 10:16:33 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/04 10:28:46 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	print_echo(t_msh *msh, char **line)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (line[++i])
 	{
-		if(i > 1)
+		if (i > 1)
 			write(msh->fd, " ", 1);
 		write (msh->fd, line[i], ft_strlen(line[i]));
 	}
