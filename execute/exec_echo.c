@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 15:12:04 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 10:28:46 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/05 15:37:50 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	print_echo(t_msh *msh, char **line)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (line[++i])
 	{
-		if (i > 1)
+		if (i > 2)
 			write(msh->fd, " ", 1);
 		write (msh->fd, line[i], ft_strlen(line[i]));
 	}
@@ -27,7 +27,7 @@ void	print_echo(t_msh *msh, char **line)
 
 int	exec_echo(t_msh *msh)
 {
-	if (!ft_strcmp(*msh->cmd->arg, "-n") && *msh->cmd->arg)
+	if (!ft_strcmp(msh->cmd->arg[1], "-n"))
 		print_echo(msh, msh->cmd->arg);
 	else
 	{
