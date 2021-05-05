@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 17:23:20 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 19:29:46 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/05 16:10:56 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ int	exec_cd_previous_dir(t_msh *msh)
 int	exec_cd_dir(t_msh *msh)
 {
 	if (chdir(msh->cmd->arg[1]) < 0)
-	{
-		msh->code = 1;
 		ft_error(msh, NULL, NULL, 1);
-	}
 	else
 	{
 		getcwd(msh->buff, BUFF_SIZE);

@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/05 15:43:42 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/05 16:15:25 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_msh
 }t_msh;
 
 int		g_process_flag;
+int		g_status;
 int		pars_line(t_msh *msh, char **line);
 int		get_envp(char **envp, t_msh *msh);
 void	sort_envp(char ***env);
