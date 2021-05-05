@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/05 15:25:56 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/05 15:43:42 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <errno.h>
+# include <signal.h>
+# include <term.h>
 # include "./utils/libft/libft.h"
 # include "./utils/gnl/get_next_line.h"
 # include "./utils/ft_arr/ft_arr.h"
-# include <signal.h>
-# include <term.h>
 # include <sys/_types/_pid_t.h>
 # include <sys/fcntl.h>
 # include <sys/wait.h>
