@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/04 01:18:27 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/05 15:21:31 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,15 @@ static char	set_flags(char ch, t_msh *msh, char **line)
 	return (ch);
 }
 
-char	*get_arg(t_msh *msh, char **line)
+char	*get_arg(t_msh *msh, char **line, char *out)
 {
-	char	*out;
-
-	out = NULL;
 	msh->pf = F_NONE;
 	skip_sp(line);
 	while (*line && **line && !is_end(msh->pf, **line))
 	{
 		set_flags(**line, msh, line);
 		if (!*line[0] && msh->pf & SHL)
-		{
-			write(1, "> ", 2);
-			shell_prompt(msh, 0, 0, 0);
-			return (out);
-		}
+			return (get_arg_dop(msh, out));
 		if (msh->pf & SHL)
 		{
 			mkline_dlch(&out, line);

@@ -6,7 +6,7 @@
 #    By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/04/30 02:24:00 by hveiled          ###   ########.fr        #
+#    Updated: 2021/05/05 15:15:42 by hveiled          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS = \
 		parser/pars_line.c \
 		parser/get_arg.c \
 		parser/pars_utils.c \
+		parser/pars_utils2.c \
 		execute/set_fd.c \
 		execute/set_pfd.c \
 		execute/exec_env.c \

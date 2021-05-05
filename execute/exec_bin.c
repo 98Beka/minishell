@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 11:32:35 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 14:50:14 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/05 10:12:22 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	exec_bin(t_msh *msh)
 	{
 		path = get_binary(msh, msh->cmd);
 		if (msh->cmd->r_redir || msh->cmd->l_redir || msh->cmd->dbl_r_redir)
-			exec_redirect(msh, msh->cmd);
+			if (!exec_redirect(msh, msh->cmd))
+				return (0);
 		if (execve(path, msh->cmd->arg, msh->env) < 0)
 			exit(execve_error(msh, path, msh->cmd));
 		free(path);

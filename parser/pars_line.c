@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:39:49 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 09:41:27 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/05 15:21:45 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	redir(t_msh *msh, char **line, int *dir, char ch)
 		*dir = 1;
 	}
 	skip_sp_ch(line, ch);
-	last_cmd(msh->cmd)->file = get_arg(msh, line);
+	last_cmd(msh->cmd)->file = get_arg(msh, line, NULL);
 }
 
 int	pars_line(t_msh *msh, char **line)
@@ -54,7 +54,7 @@ int	pars_line(t_msh *msh, char **line)
 				redir(msh, line, &(last_cmd(msh->cmd)->r_redir), '>');
 		}
 		else
-			add_l_line(&(last_cmd(msh->cmd)->arg), get_arg(msh, line));
+			add_l_line(&(last_cmd(msh->cmd)->arg), get_arg(msh, line, NULL));
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 12:28:19 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/05 15:25:56 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define CD		0b01000000
 # define EXIT	0b00000001
 
-//flags of parser
 # define F_NONE 0b00000000
 # define SNGL   0b10000000
 # define DBL    0b01000000
@@ -110,7 +109,6 @@ void	skip_sp(char **line);
 void	skip_sp_ch(char **line, char ch);
 void	new_cmd(t_cmd **cmd);
 t_cmd	*last_cmd(t_cmd *cmd);
-char	*get_arg(t_msh *msh, char **line);
 void	mkline_dlch(char **out, char **line);
 void	change_cmd_line(t_msh *msh);
 void	del_cap(t_msh *msh, int len);
@@ -118,4 +116,6 @@ void	clean_console(t_msh *msh, int *len);
 void	set_history(t_msh *msh);
 void	init_history(t_msh *msh);
 void	free_msh(t_msh *msh, pid_t *pid);
+char	*get_arg_dop(t_msh *msh, char *out);
+char	*get_arg(t_msh *msh, char **line, char *out);
 #endif
