@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/06 21:02:21 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 21:07:03 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	dollar(t_msh *msh, char **line)
 
 	d = ft_strdup("");
 	del_at_index(line, 0);
-	while (line && **line && ft_isalnum(**line))
+	while (line && **line && (ft_isalnum(**line) || **line == '?'))
 		mkline_dlch(&d, line);
 	if (*d == '?')
 		tmp = ft_itoa(msh->code);
