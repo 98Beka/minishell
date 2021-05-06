@@ -6,23 +6,11 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/06 16:10:33 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 16:42:00 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static int	is_end(char pf, char ch)
-{
-	return ((ch == ' ' && !(pf & DBL) && !(pf & SNGL))
-		|| ch == ';' || ch == '|');
-}
-
-static char	get_flags(char ch, char **line)
-{
-	del_at_index(line, 0);
-	return (ch);
-}
 
 static void	dollar(t_msh *msh, char **line)
 {
@@ -32,7 +20,7 @@ static void	dollar(t_msh *msh, char **line)
 
 	d = ft_strdup("");
 	del_at_index(line, 0);
-	while (line && **line && **line != ' ' && **line != '\"' &&  **line != '\'' && **line != '$')
+	while (line && **line && ft_isalnum(**line))
 		mkline_dlch(&d, line);
 	if (*d == '?')
 		tmp = ft_itoa(msh->code);
