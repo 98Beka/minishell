@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 10:05:21 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 12:45:33 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	main(int ac, char **av, char **envp)
 	get_envp(envp, &msh);
 	set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
 	msh.shell_name = ft_strdup(av[0] + 2);
+	// msh.line = ft_strdup("echo \"\'$PATH\'\"");
+	// pars_line(&msh, &msh.line);
 	set_termcap(&msh);
 	signal(SIGINT, sigint);
 	signal(SIGQUIT, sigquit);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+         #
+#    By: ehande <ehande@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/05/05 15:15:42 by hveiled          ###   ########.fr        #
+#    Updated: 2021/05/05 22:03:28 by ehande           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,7 +110,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			$(MAKE) bonus -C utils/libft/
 			$(MAKE) -C utils/ft_arr/
-			$(CC) $(CFLAGS) -o $(NAME) $(LIBFT) $(2DARR) $(OBJS) $(TERM)
+			$(CC) $(CFLAGS) -o $(NAME) $(LIBFT) $(2DARR) $(OBJS) $(TERM) -g
 
 clean:
 			@$(MAKE) clean -C utils/libft/
