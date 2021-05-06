@@ -6,7 +6,7 @@
 #    By: ehande <ehande@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/05/05 22:03:28 by ehande           ###   ########.fr        #
+#    Updated: 2021/05/06 14:58:21 by ehande           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,7 +110,12 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			$(MAKE) bonus -C utils/libft/
 			$(MAKE) -C utils/ft_arr/
-			$(CC) $(CFLAGS) -o $(NAME) $(LIBFT) $(2DARR) $(OBJS) $(TERM) -g
+			$(CC) -g $(CFLAGS) -o  $(NAME) -g $(LIBFT) $(2DARR)  $(OBJS) $(TERM)
+
+t:
+			$(MAKE) bonus -C utils/libft/
+			$(MAKE) -C utils/ft_arr/
+			$(CC) -g $(CFLAGS) -o  $(NAME) -g $(SRCS) $(LIB_ARR)  $(LIB_SRCS) $(TERM) 
 
 clean:
 			@$(MAKE) clean -C utils/libft/
@@ -121,6 +126,7 @@ fclean:		clean
 			$(MAKE) fclean -C utils/libft/
 			$(MAKE) fclean -C utils/ft_arr/
 			$(RM) $(NAME)
+			$(RM) .history
 
 re:			fclean $(NAME)
 

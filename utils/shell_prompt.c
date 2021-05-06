@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 12:59:41 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 13:40:43 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,11 @@ void	up_down(t_msh *msh, char *bf, int *len, ssize_t *stp)
 	if (!*msh->history)
 		return ;
 	tputs(restore_cursor, 1, ft_putchar);
-	if (!ft_strncmp(bf, "\e[A", 3))
-	{
-		if (msh->h_index > 0)
+	if (!ft_strncmp(bf, "\e[A", 3) && msh->h_index > 0)
 			msh->h_index -=1;
-		tmp = msh->history[msh->h_index];
-	}
-	else if (!ft_strncmp(bf, "\e[B", 3) && msh->h_index < dbl_len(msh->history))
-	{
-		if (msh->history[msh->h_index + 1])
-		{
+	else if (!ft_strncmp(bf, "\e[B", 3) && msh->history[msh->h_index + 1])
 			msh->h_index +=1;
-			tmp = msh->history[msh->h_index];
-		}
-		else
-			tmp = "";
-	}
+	tmp = msh->history[msh->h_index];
 	*stp = write(0, tmp, ft_strlen(tmp));
 	free(msh->line);
 	msh->line = ft_strdup(tmp);
@@ -86,7 +75,7 @@ int	shell_prompt(t_msh *msh, int len, int l, ssize_t stp)
 {
 	msh->line = NULL;
 	tputs(save_cursor, 1, ft_putchar);
-	msh->h_index = dbl_len(msh->history);
+	msh->h_index = dbl_len(msh->history) - 1;
 	while (!ft_strnstr(msh->buff, "\n", 1))
 	{
 		l = read(0, msh->buff, BUFF_SIZE);

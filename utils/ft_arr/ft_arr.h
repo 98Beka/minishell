@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 12:50:22 by ehande            #+#    #+#             */
-/*   Updated: 2021/04/29 17:18:50 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 14:39:11 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ int		make_line(char **line, char ch);
 int		add_char_index(char **line, char ch, int index);
 int		del_in_index(char **line, int index);
 int		dbl_len(char **input);
+int		add_l_index(char ***input, char *line, int index);
 #endif
