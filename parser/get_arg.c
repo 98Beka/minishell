@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/05 15:21:31 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/06 15:06:55 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ static void	dollar(t_msh *msh, char **line)
 		tmp = get_env_val(d, msh->env);
 	if (!*d)
 		tmp = ft_strdup("$");
+	free(d);
 	i = -1;
 	if (!tmp)
 		return ;
 	while (tmp[++i])
 		add_char_index(line, tmp[i], i);
 	free(tmp);
-	free(d);
+	
 }
 
 static char	set_flags(char ch, t_msh *msh, char **line)

@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 13:40:43 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 15:13:02 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	shell_prompt(t_msh *msh, int len, int l, ssize_t stp)
 			right_left_del(msh, &stp, len, msh->buff);
 		else if (!ft_strncmp(msh->buff, "\3", 1))
 			continue ;
-		else if (!ft_strncmp(msh->buff, "\4", 1))
+		else if (!ft_strncmp(msh->buff, "\4", 1) && !msh->line)
 			exec_sigquit(msh);
 		else
 			stp += write(1, msh->buff, l);
