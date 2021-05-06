@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:39:49 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/05 21:59:19 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 16:47:21 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	redir(t_msh *msh, char **line, int *dir, char ch)
 	{
 		if (*dir)
 		{
-			close(open(msh->cmd->file, O_CREAT, 0644));
+			close(open(msh->cmd->file, O_CREAT | O_TRUNC, 0644));
 			free(msh->cmd->file);
 		}
 		*dir = 1;
