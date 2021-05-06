@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 17:53:50 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 12:28:22 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/06 19:37:45 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	exec_piped_cmd(t_msh *msh, t_cmd *cmnd, pid_t *pid)
 			child_do(msh, cmnd, path, i);
 		else
 			parent_do(msh, i, pid);
+		msh->code = WEXITSTATUS(msh->code);
 		cmnd = (cmnd)->next;
 	}
 	return (1);
