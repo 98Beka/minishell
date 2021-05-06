@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/06 15:06:55 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 16:10:33 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	dollar(t_msh *msh, char **line)
 
 	d = ft_strdup("");
 	del_at_index(line, 0);
-	while (line && **line && **line != ' ' && **line != '\"' && **line != '$')
+	while (line && **line && **line != ' ' && **line != '\"' &&  **line != '\'' && **line != '$')
 		mkline_dlch(&d, line);
 	if (*d == '?')
 		tmp = ft_itoa(msh->code);
@@ -40,8 +40,8 @@ static void	dollar(t_msh *msh, char **line)
 		tmp = get_env_val(d, msh->env);
 	if (!*d)
 		tmp = ft_strdup("$");
-	free(d);
 	i = -1;
+	free(d);
 	if (!tmp)
 		return ;
 	while (tmp[++i])
@@ -82,11 +82,15 @@ char	*get_arg(t_msh *msh, char **line, char *out)
 			msh->pf = msh->pf & ~SHL;
 		}
 		if (msh->pf & SNGL)
+		{
 			while (**line && **line != '\'' && !is_end(msh->pf, **line))
 				mkline_dlch(&out, line);
+			del_at_index(line, 0);
+		}
 		if (**line == '$')
 			dollar(msh, line);
-		if (**line && !(msh->pf & SNGL) && **line != '\"')
+		set_flags(**line, msh, line);
+		if (**line && **line != '\"' && !is_end(msh->pf, **line))
 			mkline_dlch(&out, line);
 	}
 	return (out);

@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 14:56:23 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 15:58:39 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ int	main(int ac, char **av, char **envp)
 	set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
 	msh.shell_name = ft_strdup(av[0] + 2);
 	set_termcap(&msh);
+	// msh.line = ft_strdup("echo \"   \"'\"'");
+	// new_cmd(&msh.cmd);
+	// pars_line(&msh, &msh.line);
 	signal(SIGINT, sigint);
 	signal(SIGQUIT, sigquit);
 	while (loop(&msh))
