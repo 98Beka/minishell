@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 13:00:13 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/06 14:50:19 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 22:29:16 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	add_l_index(char ***input, char *line, int index)
 	if (!out)
 		return (0);
 	while (tmp[++i])
+	{
 		if (++j == index)
 		{
 			i -= 1;
@@ -87,6 +88,7 @@ int	add_l_index(char ***input, char *line, int index)
 		}
 		else
 			out[j] = tmp[i];
+	}
 	if (i == j + 1)
 		out[++j] = line;
 	free(*input);

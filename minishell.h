@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 21:02:28 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 22:27:00 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	free_msh(t_msh *msh, pid_t *pid);
 void	get_arg_dop(t_msh *msh);
 char	*get_arg(t_msh *msh, char *out, char pf);
 char	get_flags(char ch, char **line);
-int		is_end(char pf, char ch);
+int		is_end(t_msh *msh);
 int		check_flags(char pf);
 int		close_input(t_msh *msh);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/06 21:07:03 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 22:27:46 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	dollar(t_msh *msh, char **line)
 	while (tmp[++i])
 		add_char_index(line, tmp[i], i);
 	free(tmp);
-	
 }
 
 static char	set_flags(char ch, t_msh *msh)
@@ -59,7 +58,7 @@ char	*get_arg(t_msh *msh, char *out, char pf)
 {
 	msh->pf = pf;
 	skip_sp(&msh->line);
-	while (msh->line[0] && !is_end(msh->pf, *msh->line))
+	while (msh->line[0] && !is_end(msh))
 	{
 		set_flags(*msh->line, msh);
 		if (check_flags(msh->pf) && close_input(msh))
@@ -71,14 +70,14 @@ char	*get_arg(t_msh *msh, char *out, char pf)
 		}
 		if (msh->pf & SNGL)
 		{
-			while (msh->line && *msh->line != '\'' && !is_end(msh->pf, *msh->line))
+			while (msh->line && *msh->line != '\'' && !is_end(msh))
 				mkline_dlch(&out, &msh->line);
 			del_at_index(&msh->line, 0);
 		}
 		if (*msh->line == '$')
 			dollar(msh, &msh->line);
 		set_flags(*msh->line, msh);
-		if (msh->line[0] && *msh->line != '\"' && !is_end(msh->pf, *msh->line))
+		if (msh->line[0] && *msh->line != '\"' && !is_end(msh))
 			mkline_dlch(&out, &msh->line);
 	}
 	return (out);

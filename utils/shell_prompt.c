@@ -6,11 +6,12 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 21:37:56 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/06 21:58:36 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include "ft_arr/ft_arr.h"
 #include "libft/libft.h"
 #include <term.h>
 
@@ -24,9 +25,9 @@ void	up_down(t_msh *msh, char *bf, int *len, ssize_t *stp)
 		return ;
 	tputs(restore_cursor, 1, ft_putchar);
 	if (!ft_strncmp(bf, "\e[A", 3) && msh->h_index > 0)
-			msh->h_index -=1;
+		msh->h_index -=1;
 	else if (!ft_strncmp(bf, "\e[B", 3) && msh->history[msh->h_index + 1])
-			msh->h_index +=1;
+		msh->h_index +=1;
 	tmp = msh->history[msh->h_index];
 	*stp = write(0, tmp, ft_strlen(tmp));
 	free(msh->line);
@@ -95,7 +96,7 @@ int	shell_prompt(t_msh *msh, int len, int l, ssize_t stp)
 			right_left_del(msh, &stp, len, msh->buff);
 		else if (!ft_strncmp(msh->buff, "\034", 1))
 			continue ;
-		else if (!ft_strncmp(msh->buff, "\4", 1) && !msh->line)
+		else if (!ft_strncmp(msh->buff, "\4", 1) && !stp)
 			exec_sigquit(msh);
 		else
 			stp += write(1, msh->buff, l);
