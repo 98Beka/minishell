@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 15:21:15 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 15:32:28 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/06 15:37:59 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ int	exec_child(t_msh *msh)
 {
 	char	*path;
 
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	//tcsetattr(0, TCSANOW, &msh->term);
 	path = get_binary(msh, msh->cmd);
 	if (!ft_strcmp(path, "./minishell"))
 		shlvl_up(msh);

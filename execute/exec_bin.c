@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 11:32:35 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 15:33:40 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/06 16:32:45 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,14 @@ int	exec_bin(t_msh *msh)
 	else if (pid == 0)
 		exec_child(msh);
 	else
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		if (waitpid(pid, &msh->code, 0) < 0)
 			return (ft_error(msh, NULL, NULL, 1));
+	}
+	signal(SIGINT, sigint);
+	signal(SIGQUIT, sigquit);
 	msh->code = WEXITSTATUS(msh->code);
 	tcap_off(msh);
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 15:13:02 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 15:52:03 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ void	right_left_del(t_msh *msh, ssize_t *stp, int len, char *bf)
 
 void	exec_sigquit(t_msh *msh)
 {
+	(void)msh;
 	tputs(restore_cursor, 1, ft_putchar);
 	write(1, "exit\n", 5);
-	msh->term.c_lflag |= ECHO;
-	msh->term.c_lflag |= ICANON;
-	tcsetattr(0, TCSANOW, &msh->term);
+	//msh->term.c_lflag |= ECHO;
+	//msh->term.c_lflag |= ICANON;
+	//tcsetattr(0, TCSANOW, &msh->term);
 	exit(0);
 }
 
@@ -86,7 +87,7 @@ int	shell_prompt(t_msh *msh, int len, int l, ssize_t stp)
 			|| !ft_strncmp(msh->buff, "\e[D", 3)
 			|| !ft_strncmp(msh->buff, "\177", 1))
 			right_left_del(msh, &stp, len, msh->buff);
-		else if (!ft_strncmp(msh->buff, "\3", 1))
+		else if (!ft_strncmp(msh->buff, "\034", 1))
 			continue ;
 		else if (!ft_strncmp(msh->buff, "\4", 1) && !msh->line)
 			exec_sigquit(msh);
