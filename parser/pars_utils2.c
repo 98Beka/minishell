@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 15:08:42 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 19:10:42 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 21:02:16 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ int close_input(t_msh *msh)
 	return (1);
 }
 
-void	get_arg_dop(t_msh *msh, char **out)
+void	get_arg_dop(t_msh *msh)
 {
 	while (close_input(msh))
 	{
 		write(1, "> ", 2);
 		shell_prompt(msh, 0, 0, 0);
-		add_char_index(out, '\n', ft_strlen(*out) - 1);
 	}
 }
 

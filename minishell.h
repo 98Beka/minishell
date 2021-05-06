@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 19:10:39 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 21:02:28 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	clean_console(t_msh *msh, int *len);
 void	set_history(t_msh *msh);
 void	init_history(t_msh *msh);
 void	free_msh(t_msh *msh, pid_t *pid);
-void	get_arg_dop(t_msh *msh, char **out);
+void	get_arg_dop(t_msh *msh);
 char	*get_arg(t_msh *msh, char *out, char pf);
 char	get_flags(char ch, char **line);
 int		is_end(char pf, char ch);

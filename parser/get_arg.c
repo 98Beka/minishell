@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/06 19:10:34 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 21:02:21 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_arg(t_msh *msh, char *out, char pf)
 	{
 		set_flags(*msh->line, msh);
 		if (check_flags(msh->pf) && close_input(msh))
-			get_arg_dop(msh, *out);
+			get_arg_dop(msh);
 		if (msh->pf & SHL)
 		{
 			mkline_dlch(&out, &msh->line);
