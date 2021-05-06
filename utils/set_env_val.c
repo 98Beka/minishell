@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 15:20:44 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/30 00:39:09 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/06 21:15:51 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	check_key(char *key)
 			if (key[i] != ' ' && !ft_isalpha(key[i]) && !ft_isdigit(key[i]))
 			{
 				printf("minishell: export: `%s': not a valid identifier\n", key);
+				free(key);
 				return (0);
 			}
 		}
@@ -50,6 +51,7 @@ int	check_key(char *key)
 	else
 	{
 		printf("minishell: export: `%s': not a valid identifier\n", key);
+		free(key);
 		return (0);
 	}
 	return (1);
@@ -108,5 +110,6 @@ int	set_env_val(char ***env, char *key, char *value)
 		new_env[i] = ft_strdup((*env)[i]);
 	free_2d(env);
 	*env = new_env;
+	free(key);
 	return (1);
 }

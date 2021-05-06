@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   shell_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 18:59:30 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 21:37:56 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include "libft/libft.h"
 #include <term.h>
 
 void	up_down(t_msh *msh, char *bf, int *len, ssize_t *stp)
@@ -63,12 +64,18 @@ void	right_left_del(t_msh *msh, ssize_t *stp, int len, char *bf)
 
 void	exec_sigquit(t_msh *msh)
 {
-	(void)msh;
+	char	*var;
+
+	var = get_env_val("SHLVL", msh->env);
 	tputs(restore_cursor, 1, ft_putchar);
 	write(1, "exit\n", 5);
-	//msh->term.c_lflag |= ECHO;
-	//msh->term.c_lflag |= ICANON;
-	//tcsetattr(0, TCSANOW, &msh->term);
+	if (!ft_strcmp(var, "2"))
+	{
+		msh->term.c_lflag |= ECHO;
+		msh->term.c_lflag |= ICANON;
+		tcsetattr(0, TCSANOW, &msh->term);
+	}
+	free(var);
 	exit(0);
 }
 
