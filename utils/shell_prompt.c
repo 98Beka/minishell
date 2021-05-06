@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 15:52:03 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/06 18:59:30 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	exec_sigquit(t_msh *msh)
 
 int	shell_prompt(t_msh *msh, int len, int l, ssize_t stp)
 {
-	msh->line = NULL;
 	tputs(save_cursor, 1, ft_putchar);
 	msh->h_index = dbl_len(msh->history) - 1;
 	while (!ft_strnstr(msh->buff, "\n", 1))

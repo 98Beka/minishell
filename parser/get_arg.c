@@ -6,7 +6,7 @@
 /*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 02:39:33 by ehande            #+#    #+#             */
-/*   Updated: 2021/05/06 16:53:23 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 19:10:34 by ehande           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,48 +38,48 @@ static void	dollar(t_msh *msh, char **line)
 	
 }
 
-static char	set_flags(char ch, t_msh *msh, char **line)
+static char	set_flags(char ch, t_msh *msh)
 {
 	if (ch == '\'' && msh->pf & SNGL)
-		return (msh->pf = msh->pf & ~get_flags(SNGL, line));
+		return (msh->pf = msh->pf & ~get_flags(SNGL, &msh->line));
 	if (ch == '\"' && msh->pf & DBL)
-		return (msh->pf = msh->pf & ~get_flags(DBL, line));
+		return (msh->pf = msh->pf & ~get_flags(DBL, &msh->line));
 	if (ch == '\"' && !(msh->pf & SNGL))
-		return (msh->pf = msh->pf | get_flags(DBL, line));
+		return (msh->pf = msh->pf | get_flags(DBL, &msh->line));
 	if (ch == '\'' && !(msh->pf & DBL))
-		return (msh->pf = msh->pf | get_flags(SNGL, line));
+		return (msh->pf = msh->pf | get_flags(SNGL, &msh->line));
 	if (ch == '\\' && !(msh->pf & SNGL))
 		if (!(msh->pf & DBL) || ((msh->pf & DBL) && \
-			((*line)[1] == '$' || (*line)[1] == '\\')))
-			return (msh->pf = msh->pf | get_flags(SHL, line));
+			((msh->line[1] == '$' || msh->line[1] == '\\'))))
+			return (msh->pf = msh->pf | get_flags(SHL, &msh->line));
 	return (ch);
 }
 
-char	*get_arg(t_msh *msh, char **line, char *out)
+char	*get_arg(t_msh *msh, char *out, char pf)
 {
-	msh->pf = F_NONE;
-	skip_sp(line);
-	while (*line && **line && !is_end(msh->pf, **line))
+	msh->pf = pf;
+	skip_sp(&msh->line);
+	while (msh->line[0] && !is_end(msh->pf, *msh->line))
 	{
-		set_flags(**line, msh, line);
-		if (!*line[0] && msh->pf & SHL)
-			return (get_arg_dop(msh, out));
+		set_flags(*msh->line, msh);
+		if (check_flags(msh->pf) && close_input(msh))
+			get_arg_dop(msh, *out);
 		if (msh->pf & SHL)
 		{
-			mkline_dlch(&out, line);
+			mkline_dlch(&out, &msh->line);
 			msh->pf = msh->pf & ~SHL;
 		}
 		if (msh->pf & SNGL)
 		{
-			while (**line && **line != '\'' && !is_end(msh->pf, **line))
-				mkline_dlch(&out, line);
-			del_at_index(line, 0);
+			while (msh->line && *msh->line != '\'' && !is_end(msh->pf, *msh->line))
+				mkline_dlch(&out, &msh->line);
+			del_at_index(&msh->line, 0);
 		}
-		if (**line == '$')
-			dollar(msh, line);
-		set_flags(**line, msh, line);
-		if (**line && **line != '\"' && !is_end(msh->pf, **line))
-			mkline_dlch(&out, line);
+		if (*msh->line == '$')
+			dollar(msh, &msh->line);
+		set_flags(*msh->line, msh);
+		if (msh->line[0] && *msh->line != '\"' && !is_end(msh->pf, *msh->line))
+			mkline_dlch(&out, &msh->line);
 	}
 	return (out);
 }
