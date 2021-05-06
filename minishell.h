@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehande <ehande@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 14:38:58 by ehande           ###   ########.fr       */
+/*   Updated: 2021/05/06 15:21:32 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		set_termcap(t_msh *msh);
 int		shell_prompt(t_msh *msh, int len, int l, ssize_t stp);
 char	*get_binary(t_msh *msh, t_cmd *cmd);
 int		launch(t_msh *msh);
-int		exec_child(t_msh *msh, char *bin_path);
+int		exec_child(t_msh *msh);
 int		exec_parent(t_msh *msh, char *bin_path);
 void	skip_sp(char **line);
 void	skip_sp_ch(char **line, char ch);

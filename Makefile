@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ehande <ehande@student.42.fr>              +#+  +:+       +#+         #
+#    By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/02 19:46:01 by hveiled           #+#    #+#              #
-#    Updated: 2021/05/06 14:58:21 by ehande           ###   ########.fr        #
+#    Updated: 2021/05/06 15:21:46 by hveiled          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS = \
 		execute/exec_single_cmd.c \
 		execute/exec_signal.c \
 		execute/exec_bin.c \
+		execute/exec_child.c \
 		execute/launch.c \
 		execute/ft_error.c \
 		execute/execve_error.c
