@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:48:05 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/09 15:37:19 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/11 20:18:09 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	exec_sigquit(t_msh *msh)
 	var = get_env_val("SHLVL", msh->env);
 	tputs(restore_cursor, 1, ft_putchar);
 	write(1, "exit\n", 5);
-	if (!ft_strcmp(var, "2"))
+	if ((!ft_strcmp(var, "2") && msh->shell == 2)
+		|| (!ft_strcmp(var, "1") && msh->shell == 1))
 	{
 		msh->term.c_lflag |= ECHO;
 		msh->term.c_lflag |= ICANON;

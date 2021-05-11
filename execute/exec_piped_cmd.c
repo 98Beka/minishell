@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 17:53:50 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 19:37:45 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/11 21:11:06 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,19 @@ int	child_do(t_msh *msh, t_cmd *cmnd, char *path, int i)
 	return (1);
 }
 
-int	exec_piped_cmd(t_msh *msh, t_cmd *cmnd, pid_t *pid)
+int	exec_piped_cmd(t_msh *msh, t_cmd *cmnd, pid_t *pid, int i)
 {
-	int		i;
 	char	*path;
 
-	i = -1;
 	path = NULL;
+	msh->exp_pipe = 0;
+	if (!ft_strcmp(cmnd->arg[0], "export") && msh->pipe_count)
+	{
+		msh->exp_pipe = 1;
+		declare(msh, &msh->env);
+		msh->exp_pipe = 0;
+		return (1);
+	}
 	while (cmnd)
 	{
 		++i;

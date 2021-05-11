@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:36:35 by hveiled           #+#    #+#             */
-/*   Updated: 2021/04/29 11:56:28 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/11 16:07:01 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	exec_env(t_msh *msh)
 	while (msh->env[i])
 	{
 		if (ft_strrchr(msh->env[i], '='))
-			ft_putendl_fd(msh->env[i], msh->fd);
+			ft_putendl_fd(msh->env[i], STDOUT_FILENO);
 		i++;
 	}
 	return (1);

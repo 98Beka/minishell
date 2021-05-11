@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:02:12 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 21:58:24 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/11 20:19:26 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 #include "utils/libft/libft.h"
 #include <sys/signal.h>
 
-int	execute(t_msh *msh)
+int	execute(t_msh *msh, t_cmd *cmd)
 {
-	if (!msh->cmd->arg[0])
+	if (!cmd->arg[0])
 		return (write(1, "", 2));
-	else if (!ft_strcmp(msh->cmd->arg[0], "env"))
+	else if (!ft_strcmp(cmd->arg[0], "env"))
 		return (exec_env(msh));
-	else if (!ft_strcmp(msh->cmd->arg[0], "pwd"))
+	else if (!ft_strcmp(cmd->arg[0], "pwd"))
 		return (exec_pwd(msh));
-	else if (!ft_strcmp(msh->cmd->arg[0], "exit"))
+	else if (!ft_strcmp(cmd->arg[0], "exit"))
 		return (exec_exit(msh));
-	else if (!ft_strcmp(msh->cmd->arg[0], "cd"))
+	else if (!ft_strcmp(cmd->arg[0], "cd"))
 		return (exec_cd(msh));
-	else if (!ft_strcmp(msh->cmd->arg[0], "export"))
+	else if (!ft_strcmp(cmd->arg[0], "export"))
 		return (exec_export(msh));
-	else if (!ft_strcmp(msh->cmd->arg[0], "unset"))
+	else if (!ft_strcmp(cmd->arg[0], "unset"))
 		return (exec_unset(msh));
-	else if (!ft_strcmp(msh->cmd->arg[0], "echo"))
+	else if (!ft_strcmp(cmd->arg[0], "echo"))
 		return (exec_echo(msh));
 	return (0);
 }
@@ -75,7 +75,7 @@ int	main(int ac, char **av, char **envp)
 	init_history(&msh);
 	get_envp(envp, &msh);
 	msh.line = NULL;
-	set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
+	//set_env_val(&msh.env, ft_strdup("OLDPWD"), NULL);
 	msh.shell_name = ft_strdup(av[0] + 2);
 	set_termcap(&msh);
 	signal(SIGINT, sigint);

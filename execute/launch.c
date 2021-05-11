@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 22:18:24 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/04 17:34:49 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/11 21:07:15 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	launch(t_msh *msh)
 	i = -1;
 	if (msh->pipe_count != 0)
 	{
-		if (!exec_piped_cmd(msh, msh->cmd, pid))
+		if (!exec_piped_cmd(msh, msh->cmd, pid, -1))
 			return (1);
 	}
 	else

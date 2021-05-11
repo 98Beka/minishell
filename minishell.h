@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 17:07:09 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 22:27:00 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/11 21:07:27 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ typedef struct s_msh
 	DIR				*dir;
 	int				code;
 	struct termios	term;
+	int				shell;
+	int				exp_pipe;
+	char			*flag;
 }t_msh;
 
 int		g_process_flag;
@@ -89,10 +92,10 @@ int		exec_export(t_msh *msh);
 int		exec_unset(t_msh *msh);
 int		exec_echo(t_msh *msh);
 int		exec_redirect(t_msh *msh, t_cmd *cmnd);
-int		exec_piped_cmd(t_msh *msh, t_cmd *cmnd, pid_t *pid);
+int		exec_piped_cmd(t_msh *msh, t_cmd *cmnd, pid_t *pid, int i);
 int		exec_single_cmd(t_msh *msh);
 int		exec_bin(t_msh *msh);
-int		execute(t_msh *msh);
+int		execute(t_msh *msh, t_cmd *cmd);
 int		execve_error(t_msh *msh, char *path, t_cmd *cmnd);
 int		set_fd(t_msh *msh);
 void	set_pfd(t_msh *msh, int i, int cmd);
@@ -123,4 +126,5 @@ char	get_flags(char ch, char **line);
 int		is_end(t_msh *msh);
 int		check_flags(char pf);
 int		close_input(t_msh *msh);
+int		declare(t_msh *msh, char ***env);
 #endif

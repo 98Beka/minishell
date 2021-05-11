@@ -6,7 +6,7 @@
 /*   By: hveiled <hveiled@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 10:07:52 by hveiled           #+#    #+#             */
-/*   Updated: 2021/05/06 21:11:12 by hveiled          ###   ########.fr       */
+/*   Updated: 2021/05/11 21:00:41 by hveiled          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,22 @@ char	**ft_arrdup(char **env)
 	return (dup);
 }
 
-void	printf_fd(int fd, char *flag, char *split0, char *split1)
+void	printf_fd(int fd, t_msh *msh, char *split0, char *split1)
 {
-	if (flag)
+	if (msh->flag)
 	{
 		ft_putstr_fd("declare -x ", fd);
 		ft_putstr_fd(split0, fd);
 		ft_putstr_fd("=", fd);
 		ft_putstr_fd("\"", fd);
 		ft_putstr_fd(split1, fd);
-		ft_putendl_fd("\"", fd);
+		if (!msh->exp_pipe)
+			ft_putendl_fd("\"", fd);
+		else
+		{
+			ft_putstr_fd("\"", fd);
+			ft_putendl_fd("$", fd);
+		}
 	}
 	else
 	{
@@ -52,7 +58,6 @@ int	declare(t_msh *msh, char ***env)
 	int		i;
 	char	**dup;
 	char	**split;
-	char	*flag;
 
 	dup = ft_arrdup(*env);
 	i = -1;
@@ -60,8 +65,8 @@ int	declare(t_msh *msh, char ***env)
 	while (dup[++i])
 	{
 		split = ft_split(dup[i], '=');
-		flag = ft_strchr(dup[i], '=');
-		printf_fd(msh->fd, flag, split[0], split[1]);
+		msh->flag = ft_strchr(dup[i], '=');
+		printf_fd(msh->fd, msh, split[0], split[1]);
 		free_2d(&split);
 	}
 	free_2d(&dup);
